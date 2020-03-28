@@ -53,11 +53,12 @@ public class Menu extends AppCompatActivity {
                     }
                     else if (finalI == 3){
                         /*placeholder*/
-                        Toast.makeText(Menu.this,"Tu jeszcze nie wiem co będzie", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Menu.this,"Tu będzie profil użytkownika", Toast.LENGTH_SHORT).show();
                     }
                     else if (finalI == 4){
                         /*ustawienia*/
-                        Toast.makeText(Menu.this,"Tu będą ustawienia", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(Menu.this, SettingsActivity.class);
+                        startActivity(i);
                     }
                     else if (finalI == 5){
                         /*wylogowanie*/
@@ -95,6 +96,20 @@ public class Menu extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Na pewno chcesz wyjść z aplikacji?")
+                .setCancelable(false)
+                .setPositiveButton("Tak", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Nie", null)
+                .show();
+    }
 
 
 }
