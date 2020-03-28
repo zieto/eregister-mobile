@@ -2,24 +2,34 @@ package com.umk.apka;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
 public class MainActivity extends AppCompatActivity {
     EditText EmailET, PasswordET;
+    SharedPreferences sharedPreferences;
+    public static final String MyPREFERENCES = "myprefs";
+    public static final String value = "id";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString(value,"");
+        if (id.length() > 0) {
+            finish();
+            Intent i = new Intent(MainActivity.this,Menu.class);
+            startActivity(i);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EmailET = (EditText)findViewById(R.id.emailET);
-        PasswordET = (EditText)findViewById(R.id.passwordET);
+        EmailET = (EditText) findViewById(R.id.emailET);
+        PasswordET = (EditText) findViewById(R.id.passwordET);
     }
 
     public void OnLogin(View view){

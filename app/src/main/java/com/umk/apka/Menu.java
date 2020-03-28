@@ -4,8 +4,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridLayout;
@@ -14,14 +16,16 @@ import android.widget.Toast;
 public class Menu extends AppCompatActivity {
 
     GridLayout gridLayout;
+    SharedPreferences sharedPreferences;
+    public static final String MyPREFERENCES = "myprefs";
+    public static final String value = "id";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
         gridLayout=(GridLayout)findViewById(R.id.mainGrid);
-
         setSingleEvent(gridLayout);
 
     }
@@ -70,6 +74,8 @@ public class Menu extends AppCompatActivity {
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
+            sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor  = sharedPreferences.edit();
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     Intent i = new Intent(Menu.this,MainActivity.class);
@@ -78,6 +84,8 @@ public class Menu extends AppCompatActivity {
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.putExtra("EXIT",true);
                     startActivity(i);
+                    editor.clear();
+                    editor.commit();
                     finish();
                     break;
 
