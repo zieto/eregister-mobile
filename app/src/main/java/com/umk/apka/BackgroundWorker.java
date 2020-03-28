@@ -85,20 +85,21 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         super.onPreExecute();
         alertDialog.setMessage("Nieprawidłowy e-mail lub hasło użytkownika!");
         alertDialog.show();
-        sharedPreferences = context.getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor  = sharedPreferences.edit();
-        editor.putString(value,result);
-        editor.apply();
 
         if(!(result.contains("login not successful")))
         {
+            sharedPreferences = context.getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor  = sharedPreferences.edit();
+            editor.putString(value,result);
+            editor.apply();
+            alertDialog.setMessage("Pomyślnie zalogowano!");
+            alertDialog.show();
             Intent i = new Intent(context,Menu.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
-            alertDialog.setMessage("Pomyślnie zalogowano!");
-            alertDialog.show();
+
         }
 
     }
