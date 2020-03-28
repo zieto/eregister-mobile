@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -95,6 +93,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         if(!(result.contains("login not successful")))
         {
             Intent i = new Intent(context,Menu.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
             alertDialog.setMessage("Pomyślnie zalogowano!");
             alertDialog.show();

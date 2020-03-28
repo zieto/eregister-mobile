@@ -1,8 +1,6 @@
 package com.umk.apka;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         if (id.length() > 0) {
             Intent i = new Intent(MainActivity.this,Menu.class);
             startActivity(i);
-            finish();       
+            finish();
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
