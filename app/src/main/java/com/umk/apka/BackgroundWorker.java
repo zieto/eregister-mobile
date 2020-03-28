@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -83,22 +84,41 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPreExecute();
-        alertDialog.setMessage("Nieprawidłowy e-mail lub hasło użytkownika!");
-        alertDialog.show();
-
+        if(result.contains("login not successful")) {
+            alertDialog.setMessage("Nieprawidłowy e-mail lub hasło użytkownika!");
+            alertDialog.show();
+        }
         if(!(result.contains("login not successful")))
         {
             sharedPreferences = context.getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
             SharedPreferences.Editor editor  = sharedPreferences.edit();
             editor.putString(value,result);
             editor.apply();
-            alertDialog.setMessage("Pomyślnie zalogowano!");
-            alertDialog.show();
-            Intent i = new Intent(context,Menu.class);
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Logowanie");
+            builder.setMessage("Pomyślnie zalogowano!");
+            builder.setPositiveButton("OK",null);
+            final AlertDialog dialog = builder.create();
+            dialog.show();
+            final Intent i = new Intent(context, Menu.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
+            new CountDownTimer(5000, 100) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    if(!(dialog.isShowing())){
+                        this.cancel();
+                        context.startActivity(i);
+                    }
+                }
+
+                @Override
+                public void onFinish() {
+                    context.startActivity(i);
+                    dialog.dismiss();
+                }
+            }.start();
 
         }
 
