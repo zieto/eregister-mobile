@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -41,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         backgroundWorker.execute(type,email,MD5_Hash_String);
 
+    }
+
+    public void onClick(View view){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.0.105:5050/forgotpwd.html"));
+        startActivity(browserIntent);
     }
 
 
