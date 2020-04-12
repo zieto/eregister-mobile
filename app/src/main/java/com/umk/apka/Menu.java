@@ -45,11 +45,13 @@ public class Menu extends AppCompatActivity {
                     }
                     else if (finalI == 1){
                         /*plan_zajec*/
-                        Toast.makeText(Menu.this,"Tu będzie plan zajęć", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(Menu.this, PlanZajec.class);
+                        startActivity(i);
                     }
                     else if (finalI == 2){
                         /*wiadomosci*/
-                        Toast.makeText(Menu.this,"Tu będą wiadomości", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(Menu.this, Wiadomosci.class);
+                        startActivity(i);
                     }
                     else if (finalI == 3){
                         /*placeholder*/

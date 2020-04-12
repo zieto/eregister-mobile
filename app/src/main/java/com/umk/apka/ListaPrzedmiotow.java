@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.umk.apka.data.Dane_ang;
+import com.umk.apka.data.Dane_mat;
+import com.umk.apka.data.Dane_pol;
 
 import java.util.ArrayList;
 

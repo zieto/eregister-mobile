@@ -12,17 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Wiadomosci"></activity>
+        <activity android:name=".PlanZajec" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".Menu"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Dane_mat" />
-        <activity android:name=".Dane_ang" />
+        <activity android:name=".data.Dane_mat" />
+        <activity android:name=".data.Dane_ang" />
         <activity android:name=".ListaPrzedmiotow" />
-        <activity android:name=".Dane_pol" />
+        <activity android:name=".data.Dane_pol" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

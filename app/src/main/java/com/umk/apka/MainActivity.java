@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EmailET = (EditText) findViewById(R.id.emailET);
-        PasswordET = (EditText) findViewById(R.id.passwordET);
+        EmailET = findViewById(R.id.emailET);
+        PasswordET = findViewById(R.id.passwordET);
     }
 
     public void OnLogin(View view){

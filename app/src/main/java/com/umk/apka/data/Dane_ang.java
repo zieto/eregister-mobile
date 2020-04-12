@@ -1,15 +1,17 @@
-package com.umk.apka;
+package com.umk.apka.data;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.content.SharedPreferences;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.umk.apka.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class Dane_mat extends AppCompatActivity {
+public class Dane_ang extends AppCompatActivity {
 
     ListView listView;
     SharedPreferences sharedPreferences;
@@ -35,10 +37,10 @@ public class Dane_mat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getJSON("http://192.168.0.105:5050/getdata.php");
-        setContentView(R.layout.activity_dane_mat);
+        setContentView(R.layout.activity_dane_ang);
         listView = findViewById(R.id.listView);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Matematyka");
+        actionBar.setTitle("Język angielski");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
@@ -103,7 +105,7 @@ public class Dane_mat extends AppCompatActivity {
         String[] oceny = new String[jsonArray.length()];
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-            oceny[i] = obj.getString("matematyka");
+            oceny[i] = obj.getString("angielski");
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, oceny);
         listView.setAdapter(arrayAdapter);
