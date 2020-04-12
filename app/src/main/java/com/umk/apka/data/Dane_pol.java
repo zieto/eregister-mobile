@@ -32,7 +32,7 @@ public class Dane_pol extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     public static final String MyPREFERENCES = "myprefs";
-    public static final String value = "id";
+    public static final String value = "sid";
 
 
 

@@ -31,7 +31,7 @@ public class Dane_ang extends AppCompatActivity {
     ListView listView;
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "myprefs";
-    public static final String value = "id";
+    public static final String value = "sid";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

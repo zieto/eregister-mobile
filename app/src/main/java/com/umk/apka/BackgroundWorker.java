@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
-import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -33,7 +31,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
     @Override
     protected Wrapper doInBackground(String... voids) {
         String type = voids[0];
-        String login_url = "http://10.0.2.2:5050/check_role.php";
+        String login_url = "http://10.0.2.2:5050/testu.php";
 
 
         if(type.equals("login")) {
@@ -58,6 +56,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
                 Wrapper w = new Wrapper();
                 w.result = bufferedReader.readLine();
                 w.role = bufferedReader.readLine();
+                w.sid = bufferedReader.readLine();
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
@@ -98,6 +97,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
             }
             editor.putBoolean("parent",parent);
             editor.putString(value,w.result);
+            editor.putString("sid",w.sid);
             editor.apply();
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Logowanie");
@@ -140,4 +140,5 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
 class Wrapper{
     String result;
     String role;
+    String sid;
 }
