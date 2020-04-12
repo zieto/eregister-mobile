@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,7 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class BackgroundWorker extends AsyncTask<String, Void, String> {
+public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
 
     Context context;
     AlertDialog alertDialog;
@@ -29,9 +31,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         context = ctx;
     }
     @Override
-    protected String doInBackground(String... voids) {
+    protected Wrapper doInBackground(String... voids) {
         String type = voids[0];
-        String login_url = "http://10.0.2.2:5050/login.php";
+        String login_url = "http://10.0.2.2:5050/check_role.php";
 
 
         if(type.equals("login")) {
@@ -53,15 +55,13 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
-                String result="";
-                String line="";
-                while((line = bufferedReader.readLine())!=null){
-                    result += line;
-                }
+                Wrapper w = new Wrapper();
+                w.result = bufferedReader.readLine();
+                w.role = bufferedReader.readLine();
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-                return result;
+                return w;
 
 
             } catch (MalformedURLException e) {
@@ -82,17 +82,22 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(Wrapper w) {
         super.onPreExecute();
-        if(result.contains("login not successful")) {
+        if(w.result.contains("login not successful")) {
             alertDialog.setMessage("Nieprawidłowy e-mail lub hasło użytkownika!");
             alertDialog.show();
         }
-        if(!(result.contains("login not successful")))
+        if(!(w.result.contains("login not successful")))
         {
             sharedPreferences = context.getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
             SharedPreferences.Editor editor  = sharedPreferences.edit();
-            editor.putString(value,result);
+            boolean parent = false;
+            if (w.role.contains("1")){
+                parent = true;
+            }
+            editor.putBoolean("parent",parent);
+            editor.putString(value,w.result);
             editor.apply();
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Logowanie");
@@ -130,4 +135,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     }
 
 
+}
+
+class Wrapper{
+    String result;
+    String role;
 }

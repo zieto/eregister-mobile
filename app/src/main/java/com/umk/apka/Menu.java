@@ -25,7 +25,7 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        gridLayout=(GridLayout)findViewById(R.id.mainGrid);
+        gridLayout = findViewById(R.id.mainGrid);
         setSingleEvent(gridLayout);
 
     }
