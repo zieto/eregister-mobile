@@ -30,7 +30,6 @@ public class Menu extends AppCompatActivity {
 
     }
 
-    // we are setting onClickListener for each element
     private void setSingleEvent(GridLayout gridLayout) {
         for(int i = 0; i<gridLayout.getChildCount();i++){
             CardView cardView=(CardView)gridLayout.getChildAt(i);
@@ -88,7 +87,7 @@ public class Menu extends AppCompatActivity {
                     i.putExtra("EXIT",true);
                     startActivity(i);
                     editor.clear();
-                    editor.commit();
+                    editor.apply();
                     finish();
                     break;
 

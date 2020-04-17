@@ -31,7 +31,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
     @Override
     protected Wrapper doInBackground(String... voids) {
         String type = voids[0];
-        String login_url = "http://10.0.2.2:5050/testu.php";
+        String login_url = "http://10.0.2.2:5050/login.php";
 
 
         if(type.equals("login")) {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dziennik</string>
+    <string name="app_name">Diary</string>
     <string name="title_activity_menu">Menu</string>
     <string name="title_activity_settings">Settings</string>
 

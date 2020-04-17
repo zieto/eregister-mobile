@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +39,7 @@ public class Dane_pol extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getJSON("http://192.168.0.105:5050/getdata.php");
-        setContentView(R.layout.activity_dane);
+        setContentView(R.layout.activity_dane_pol);
         listView = findViewById(R.id.listView);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Język polski");
