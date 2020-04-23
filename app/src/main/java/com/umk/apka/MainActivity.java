@@ -38,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
         String type = "login";
         String String_to_MD5 = password;
         String MD5_Hash_String = md5(String_to_MD5);
-
+        sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor  = sharedPreferences.edit();
+        editor.putString("email",email);
+        editor.apply();
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         backgroundWorker.execute(type,email,MD5_Hash_String);
 

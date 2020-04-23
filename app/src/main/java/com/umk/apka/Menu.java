@@ -53,8 +53,9 @@ public class Menu extends AppCompatActivity {
                         startActivity(i);
                     }
                     else if (finalI == 3){
-                        /*placeholder*/
-                        Toast.makeText(Menu.this,"Tu będzie profil użytkownika", Toast.LENGTH_SHORT).show();
+                        /*profil*/
+                        Intent i = new Intent(Menu.this, Profil.class);
+                        startActivity(i);
                     }
                     else if (finalI == 4){
                         /*ustawienia*/

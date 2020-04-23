@@ -59,6 +59,7 @@ public class Dane_mat extends AppCompatActivity {
             protected String doInBackground(Void... voids) {
                 sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString(value,"");
+                String action = "get_grades";
                 try {
                     URL url = new URL(urlWebService);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
