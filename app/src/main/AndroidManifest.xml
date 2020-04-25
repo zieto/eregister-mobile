@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.umk.apka">
+    package="com.umk.diary">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,23 +12,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Profil"></activity>
-        <activity android:name=".NewMessage" />
-        <activity android:name=".Wiadomosci" />
-        <activity android:name=".PlanZajec" />
+        <activity android:name="com.umk.diary.Profil"></activity>
+        <activity android:name="com.umk.diary.NewMessage" />
+        <activity android:name="com.umk.diary.Wiadomosci" />
+        <activity android:name="com.umk.diary.PlanZajec" />
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.umk.diary.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".Menu"
+            android:name="com.umk.diary.Menu"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".data.Dane_mat" />
-        <activity android:name=".data.Dane_ang" />
-        <activity android:name=".ListaPrzedmiotow" />
-        <activity android:name=".data.Dane_pol" />
+        <activity android:name="com.umk.diary.data.Dane_mat" />
+        <activity android:name="com.umk.diary.data.Dane_ang" />
+        <activity android:name="com.umk.diary.ListaPrzedmiotow" />
+        <activity android:name="com.umk.diary.data.Dane_pol" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.umk.diary.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

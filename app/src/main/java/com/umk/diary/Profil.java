@@ -1,4 +1,4 @@
-package com.umk.apka;
+package com.umk.diary;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,10 +9,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -128,7 +127,7 @@ public class Profil extends AppCompatActivity {
         phoneTextView.setText(metadata[0]);
         metadata[0] = obj.getString("avatar");
         avatar = metadata[0];
-        String imgURL  = "http://www.diary.co.pl/upload/"+avatar;
+        String imgURL  = "http://www.diary.co.pl/upload/avatars/"+avatar;
         new DownloadImageTask(imageView).execute(imgURL);
 
     }
@@ -156,6 +155,7 @@ public class Profil extends AppCompatActivity {
             imageView.setImageBitmap(result);
         }
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {

@@ -1,4 +1,4 @@
-package com.umk.apka;
+package com.umk.diary;
 
 import android.content.Context;
 

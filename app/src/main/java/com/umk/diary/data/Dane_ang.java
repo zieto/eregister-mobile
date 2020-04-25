@@ -1,17 +1,16 @@
-package com.umk.apka.data;
+package com.umk.diary.data;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
+import android.content.SharedPreferences;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.umk.apka.R;
+import com.umk.diary.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,9 +25,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class Dane_mat extends AppCompatActivity {
+public class Dane_ang extends AppCompatActivity {
 
     ListView listView;
+    TextView srednia, teacher;
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "myprefs";
     public static final String value = "sid";
@@ -37,10 +37,12 @@ public class Dane_mat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getJSON("http://192.168.0.105:5050/getdata.php");
-        setContentView(R.layout.activity_dane_mat);
+        setContentView(R.layout.activity_dane_ang);
         listView = findViewById(R.id.listView);
+        srednia = findViewById(R.id.srednia);
+        teacher = findViewById(R.id.teacher);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Matematyka");
+        actionBar.setTitle("Język angielski");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
@@ -104,12 +106,43 @@ public class Dane_mat extends AppCompatActivity {
     private void loadIntoListView(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
         String[] oceny = new String[jsonArray.length()];
+        String[] desc = new String[jsonArray.length()];
+        String[] datetime = new String[jsonArray.length()];
+        double suma = 0;
+        int imgid[] = new int[jsonArray.length()];
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-            oceny[i] = obj.getString("matematyka");
+            oceny[i] = obj.getString("angielski");
+            desc[i] = obj.getString("desc");
+            datetime[i] = obj.getString("datetime");
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, oceny);
-        listView.setAdapter(arrayAdapter);
+        for (int i = 0; i < jsonArray.length(); i++){
+            String temp = "wystawiono: "+datetime[i];
+            datetime[i] = temp;
+            suma = suma + Integer.parseInt(oceny[i]);
+            if (oceny[i].equals("1")){
+                imgid[i] = R.drawable.grade_1;
+            }
+            else if (oceny[i].equals("2")){
+                imgid[i] = R.drawable.grade_2;
+            }
+            else if (oceny[i].equals("3")){
+                imgid[i] = R.drawable.grade_3;
+            }
+            else if (oceny[i].equals("4")){
+                imgid[i] = R.drawable.grade_4;
+            }
+            else if (oceny[i].equals("5")){
+                imgid[i] = R.drawable.grade_5;
+            }
+            else if (oceny[i].equals("6")){
+                imgid[i] = R.drawable.grade_6;
+            }
+        }
+        suma = suma/jsonArray.length();
+        CustomListView customListView = new CustomListView(this,desc,datetime,imgid);
+        listView.setAdapter(customListView);
+        srednia.setText("średnia ocen: "+Double.toString(suma));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.umk.apka;
+package com.umk.diary;
 
 import android.app.AlertDialog;
 import android.content.Context;

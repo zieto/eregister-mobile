@@ -1,4 +1,4 @@
-package com.umk.apka;
+package com.umk.diary;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.umk.apka.data.Dane_ang;
-import com.umk.apka.data.Dane_mat;
-import com.umk.apka.data.Dane_pol;
+import com.umk.diary.data.Dane_ang;
+import com.umk.diary.data.Dane_mat;
+import com.umk.diary.data.Dane_pol;
 
 import java.util.ArrayList;
 
