@@ -41,6 +41,7 @@ public class Profil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getJSON("http://192.168.0.105:5050/getusermeta.php");
+//        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         setContentView(R.layout.activity_profil);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Twój profil");
@@ -52,9 +53,7 @@ public class Profil extends AppCompatActivity {
         emailTextView = findViewById(R.id.emailTextView);
         phoneTextView = findViewById(R.id.phoneTextView);
         emailTextView.setText(email);
-        avatar = sharedPreferences.getString("avatar_url","");
-        String imgURL  = "http://www.diary.co.pl/upload/avatars/"+avatar;
-        new DownloadImageTask(imageView).execute(imgURL);
+
     }
 
     private void getJSON(final String urlWebService) {
@@ -79,6 +78,7 @@ public class Profil extends AppCompatActivity {
                     con.setDoOutput(true);
                     OutputStream outputStream = con.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    // zamien id na user_id
                     String post_data = URLEncoder.encode("id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8")+"&"
                             +URLEncoder.encode("action", "UTF-8")+"="+URLEncoder.encode(action, "UTF-8");
                     bufferedWriter.write(post_data);
@@ -128,10 +128,8 @@ public class Profil extends AppCompatActivity {
         phoneTextView.setText(metadata[0]);
         metadata[0] = obj.getString("avatar");
         avatar = metadata[0];
-        sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor  = sharedPreferences.edit();
-        editor.putString("avatar_url",avatar);
-        editor.apply();
+        String imgURL  = "http://www.diary.co.pl/upload/"+avatar;
+        new DownloadImageTask(imageView).execute(imgURL);
 
     }
 
