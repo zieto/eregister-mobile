@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -127,9 +128,8 @@ public class Profil extends AppCompatActivity {
         phoneTextView.setText(metadata[0]);
         metadata[0] = obj.getString("avatar");
         avatar = metadata[0];
-        String imgURL  = "http://www.diary.co.pl/upload/avatars/"+avatar;
+        String imgURL  = "http://www.diary.co.pl/upload/"+avatar;
         new DownloadImageTask(imageView).execute(imgURL);
-
     }
 
     private class DownloadImageTask extends AsyncTask<String,Void,Bitmap>{
@@ -143,8 +143,14 @@ public class Profil extends AppCompatActivity {
             String urlOfImage = urls[0];
             Bitmap logo = null;
             try{
-                InputStream is = new URL(urlOfImage).openStream();
-                logo = BitmapFactory.decodeStream(is);
+                if (getResponseCodeForURLUsing(urlOfImage,"HEAD")==404){
+                    logo = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.user_diary);
+                }
+                else {
+                    InputStream is = new URL(urlOfImage).openStream();
+                    logo = BitmapFactory.decodeStream(is);
+                }
+
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -154,6 +160,14 @@ public class Profil extends AppCompatActivity {
         protected void onPostExecute(Bitmap result){
             imageView.setImageBitmap(result);
         }
+    }
+
+    private int getResponseCodeForURLUsing(String address, String method) throws IOException {
+        HttpURLConnection.setFollowRedirects(false); // Set follow redirects to false
+        final URL url = new URL(address);
+        HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+        huc.setRequestMethod(method);
+        return huc.getResponseCode();
     }
 
 

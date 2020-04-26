@@ -1,11 +1,11 @@
-package com.umk.diary.data;
+package com.umk.diary.grades;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.content.SharedPreferences;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class Dane_ang extends AppCompatActivity {
+public class Dane_mat extends AppCompatActivity {
 
     ListView listView;
     TextView srednia, teacher;
@@ -37,12 +37,12 @@ public class Dane_ang extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getJSON("http://192.168.0.105:5050/getdata.php");
-        setContentView(R.layout.activity_dane_ang);
+        setContentView(R.layout.activity_dane_mat);
         listView = findViewById(R.id.listView);
         srednia = findViewById(R.id.srednia);
         teacher = findViewById(R.id.teacher);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Język angielski");
+        actionBar.setTitle("Matematyka");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
@@ -108,11 +108,11 @@ public class Dane_ang extends AppCompatActivity {
         String[] oceny = new String[jsonArray.length()];
         String[] desc = new String[jsonArray.length()];
         String[] datetime = new String[jsonArray.length()];
-        double suma = 0;
         int imgid[] = new int[jsonArray.length()];
+        double suma = 0;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-            oceny[i] = obj.getString("angielski");
+            oceny[i] = obj.getString("matematyka");
             desc[i] = obj.getString("desc");
             datetime[i] = obj.getString("datetime");
         }

@@ -1,4 +1,4 @@
-package com.umk.diary.data;
+package com.umk.diary.grades;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

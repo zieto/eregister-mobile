@@ -1,4 +1,4 @@
-package com.umk.diary.data;
+package com.umk.diary.grades;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -25,25 +25,29 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class Dane_mat extends AppCompatActivity {
+public class Dane_pol extends AppCompatActivity {
 
     ListView listView;
     TextView srednia, teacher;
     SharedPreferences sharedPreferences;
+
     public static final String MyPREFERENCES = "myprefs";
     public static final String value = "sid";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getJSON("http://192.168.0.105:5050/getdata.php");
-        setContentView(R.layout.activity_dane_mat);
+        setContentView(R.layout.activity_dane_pol);
         listView = findViewById(R.id.listView);
         srednia = findViewById(R.id.srednia);
         teacher = findViewById(R.id.teacher);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Matematyka");
+        actionBar.setTitle("Język polski");
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
     }
 
@@ -112,7 +116,7 @@ public class Dane_mat extends AppCompatActivity {
         double suma = 0;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-            oceny[i] = obj.getString("matematyka");
+            oceny[i] = obj.getString("polski");
             desc[i] = obj.getString("desc");
             datetime[i] = obj.getString("datetime");
         }

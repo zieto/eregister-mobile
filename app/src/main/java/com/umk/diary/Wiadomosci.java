@@ -38,7 +38,7 @@ public class Wiadomosci extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Wiadomości");
         actionBar.setDisplayHomeAsUpEnabled(true);
-    }
+}
 
     @Override
     public boolean onSupportNavigateUp() {

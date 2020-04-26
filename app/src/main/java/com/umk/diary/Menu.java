@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridLayout;
+import com.umk.diary.schedules.*;
 
 public class Menu extends AppCompatActivity {
 

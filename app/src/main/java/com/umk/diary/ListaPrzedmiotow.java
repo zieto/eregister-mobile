@@ -9,9 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.umk.diary.data.Dane_ang;
-import com.umk.diary.data.Dane_mat;
-import com.umk.diary.data.Dane_pol;
+import com.umk.diary.grades.Dane_ang;
+import com.umk.diary.grades.Dane_mat;
+import com.umk.diary.grades.Dane_pol;
 
 import java.util.ArrayList;
 
