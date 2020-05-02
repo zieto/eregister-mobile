@@ -39,7 +39,7 @@ public class Dane_pol extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getJSON("http://192.168.0.105:5050/getdata.php");
+        getJSON("http://10.0.2.2:5050/getdata.php");
         setContentView(R.layout.activity_dane_pol);
         listView = findViewById(R.id.listView);
         srednia = findViewById(R.id.srednia);

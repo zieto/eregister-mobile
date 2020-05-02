@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.0.105:5050/forgotpwd.html"));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://10.0.2.2:5050/forgotpwd.html"));
         startActivity(browserIntent);
     }
 

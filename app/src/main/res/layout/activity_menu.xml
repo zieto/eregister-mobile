@@ -8,6 +8,7 @@
     android:weightSum="10"
     tools:context=".Menu">
 
+
     <RelativeLayout
         android:layout_weight="2"
         android:layout_width="match_parent"
@@ -16,13 +17,15 @@
         <TextView
             android:id="@+id/textGrid"
             android:text="MENU"
-            android:textSize="34sp"
-            android:textColor="@android:color/black"
+            android:textSize="50dp"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+
     </RelativeLayout>
+
 
     <GridLayout
         android:id="@+id/mainGrid"

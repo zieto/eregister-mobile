@@ -40,7 +40,7 @@ public class Profil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getJSON("http://192.168.0.105:5050/getusermeta.php");
+        getJSON("http://10.0.2.2:5050/getusermeta.php");
 //        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         setContentView(R.layout.activity_profil);
         ActionBar actionBar = getSupportActionBar();
