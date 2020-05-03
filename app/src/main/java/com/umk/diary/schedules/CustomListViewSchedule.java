@@ -15,18 +15,20 @@ import com.umk.diary.R;
 
 public class CustomListViewSchedule extends ArrayAdapter<String> {
 
-    private String[] desc;
-    private String[] date;
-    private int[] imgid;
+    private String[] start;
+    private String[] end;
+    private String[] subject;
+    private String[] room;
     private Activity context;
 
-    public CustomListViewSchedule(Activity context, String[] desc, String[] date, int[] imgid){
-        super(context, R.layout.listview_layout_schedule,desc);
+    public CustomListViewSchedule(Activity context, String[] start, String[] end, String[] subject, String[] room){
+        super(context, R.layout.listview_layout_schedule,start);
 
         this.context = context;
-        this.desc = desc;
-        this.date = date;
-        this.imgid = imgid;
+        this.start = start;
+        this.end = end;
+        this.subject = subject;
+        this.room = room;
 
     }
 
@@ -38,7 +40,7 @@ public class CustomListViewSchedule extends ArrayAdapter<String> {
         if(r == null){
 
             LayoutInflater layoutInflater = context.getLayoutInflater();
-            r = layoutInflater.inflate(R.layout.listview_layout,null,true);
+            r = layoutInflater.inflate(R.layout.listview_layout_schedule,null,true);
             viewHolder = new ViewHolder(r);
             r.setTag(viewHolder);
 
@@ -47,20 +49,23 @@ public class CustomListViewSchedule extends ArrayAdapter<String> {
             viewHolder = (ViewHolder)r.getTag();
 
         }
-        viewHolder.ivw.setImageResource(imgid[position]);
-        viewHolder.tvw1.setText(desc[position]);
-        viewHolder.tvw2.setText(date[position]);
+        viewHolder.tvw1.setText(start[position]);
+        viewHolder.tvw2.setText(end[position]);
+        viewHolder.tvw3.setText(subject[position]);
+        viewHolder.tvw4.setText(room[position]);
 
         return r;
     }
     class ViewHolder{
         TextView tvw1;
         TextView tvw2;
-        ImageView ivw;
+        TextView tvw3;
+        TextView tvw4;
         ViewHolder(View v){
-            tvw1 = v.findViewById(R.id.tvdesc);
-            tvw2 = v.findViewById(R.id.tvdate);
-            ivw = v.findViewById(R.id.imageView);
+            tvw1 = v.findViewById(R.id.start);
+            tvw2 = v.findViewById(R.id.end);
+            tvw3 = v.findViewById(R.id.subject);
+            tvw4 = v.findViewById(R.id.room);
         }
 
     }
