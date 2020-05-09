@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.GridLayout;
 import com.umk.diary.schedules.*;
@@ -49,7 +50,7 @@ public class Menu extends AppCompatActivity {
                     }
                     else if (finalI == 2){
                         /*wiadomosci*/
-                        Intent i = new Intent(Menu.this, Wiadomosci.class);
+                        Intent i = new Intent(Menu.this, Notes.class);
                         startActivity(i);
                     }
                     else if (finalI == 3){
