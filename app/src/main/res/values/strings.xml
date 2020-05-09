@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">Diary</string>
+    <string name="app_name">eDiary</string>
     <string name="title_activity_menu">Menu</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
+    <string name="pref_header">Preferencje</string>
+    <string name="info_header">Informacje</string>
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>
@@ -32,5 +31,11 @@
     <string name="tab_text_3">ŚR</string>
     <string name="tab_text_4">CZ</string>
     <string name="tab_text_5">PT</string>
+    <string name="info">Aplikacja eDiary powstała jako mobilna wersja aplikacji webowej o tej samej nazwie.
+    Jej zadaniem jest udostępnienie szybkiego podglądu danych na urządzeniu mobilnym dla ucznia/rodzica.
+    </string>
+    <string name="info2">Aplikacja jest częścią projektu zespołowego studentów Niestacjonarnych Studiów Inżynierskich Informatyki
+    Wydziału Matematyki i Informatyki na Uniwersytecie Mikołaja Kopernika w Toruniu.</string>
+    <string name="info3">W aplikacji wykorzystano na licencji OpenSource ikony ze strony</string>
 
 </resources>

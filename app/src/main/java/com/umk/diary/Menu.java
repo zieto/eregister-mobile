@@ -3,6 +3,7 @@ package com.umk.diary;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.preference.PreferenceManager;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -102,12 +103,22 @@ public class Menu extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences2;
+        sharedPreferences2 = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
+        final SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+        final boolean pref_auto;
+        pref_auto = sharedPreferences.getBoolean("autologin",true);
         new AlertDialog.Builder(this)
                 .setMessage("Na pewno chcesz wyjść z aplikacji?")
                 .setCancelable(false)
                 .setPositiveButton("Tak", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
+                        if (pref_auto==false){
+                            editor2.clear();
+                            editor2.apply();
+                        }
                     }
                 })
                 .setNegativeButton("Nie", null)
