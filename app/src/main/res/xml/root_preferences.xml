@@ -6,6 +6,7 @@
         <SwitchPreferenceCompat
             app:key="autologin"
             android:defaultValue="true"
+            app:summaryOff="@string/autoinfo"
             app:title="Włącz automatyczne logowanie" />
 
         <SwitchPreferenceCompat

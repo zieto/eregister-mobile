@@ -9,7 +9,7 @@ tools:context=".grades.Dane_pol">
 <ListView
     android:id="@+id/listView"
     android:layout_width="409dp"
-    android:layout_height="729dp"
+    android:layout_height="wrap_content"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="1dp" >
 
