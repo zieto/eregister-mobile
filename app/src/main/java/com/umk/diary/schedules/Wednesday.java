@@ -1,6 +1,5 @@
 package com.umk.diary.schedules;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -8,16 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.umk.diary.BackgroundWorker;
 import com.umk.diary.R;
-import com.umk.diary.grades.CustomListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +27,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
+
 
 public class Wednesday extends Fragment {
 
@@ -47,6 +43,7 @@ public class Wednesday extends Fragment {
         View view = inflater.inflate(R.layout.frag_layout,container,false);
         ListView listView = view.findViewById(R.id.listView);
         getJSON("http://10.0.2.2:5050/getschedule.php");
+//        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         return view;
     }
 
@@ -73,7 +70,9 @@ public class Wednesday extends Fragment {
                     con.setDoOutput(true);
                     OutputStream outputStream = con.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("week_day", "UTF-8")+"="+URLEncoder.encode(day, "UTF-8");
+                    String post_data = URLEncoder.encode("student_id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8")+"&"
+                            +URLEncoder.encode("action", "UTF-8")+"="+URLEncoder.encode(action, "UTF-8")+"&"
+                            +URLEncoder.encode("week_day", "UTF-8")+"="+URLEncoder.encode(day, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
@@ -93,9 +92,13 @@ public class Wednesday extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 try {
-                    loadIntoListView(s);
+                    if(s.contains("brak")){
+                        Toast.makeText(getActivity().getApplicationContext(), "Brak planu zajęć!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        loadIntoListView(s);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -121,11 +124,6 @@ public class Wednesday extends Fragment {
             room[i] = obj.getString("classroom");
         }
 
-//        for (int i = 0; i < jsonArray.length(); i++){
-//            String temp = "wystawiono: "+datetime[i];
-//            datetime[i] = temp;
-//
-//        }
 
         CustomListViewSchedule customListView = new CustomListViewSchedule(getActivity(),start,end,subject,room);
         ListView listView = getView().findViewById(R.id.listView);

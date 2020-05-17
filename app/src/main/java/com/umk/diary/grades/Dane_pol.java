@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public class Dane_pol extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getJSON("http://10.0.2.2:5050/getdata.php");
+//        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         setContentView(R.layout.activity_dane_pol);
         listView = findViewById(R.id.listView);
         srednia = findViewById(R.id.srednia);
@@ -66,6 +68,7 @@ public class Dane_pol extends AppCompatActivity {
                 sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString(value,"");
                 String action = "get_grades";
+                String subject_id = "10";
                 try {
                     URL url = new URL(urlWebService);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -74,7 +77,9 @@ public class Dane_pol extends AppCompatActivity {
                     con.setDoOutput(true);
                     OutputStream outputStream = con.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8");
+                    String post_data = URLEncoder.encode("student_id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8")+"&"
+                            +URLEncoder.encode("action", "UTF-8")+"="+URLEncoder.encode(action, "UTF-8")+"&"
+                            +URLEncoder.encode("subject_id", "UTF-8")+"="+URLEncoder.encode(subject_id, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
@@ -94,9 +99,13 @@ public class Dane_pol extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 try {
-                    loadIntoListView(s);
+                    if(s.contains("brak")){
+                        Toast.makeText(getApplicationContext(), "Brak ocen z tego przedmiotu!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        loadIntoListView(s);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -112,31 +121,36 @@ public class Dane_pol extends AppCompatActivity {
         String[] oceny = new String[jsonArray.length()];
         String[] desc = new String[jsonArray.length()];
         String[] datetime = new String[jsonArray.length()];
-        int imgid[] = new int[jsonArray.length()];
+        String[] tempname = new String[jsonArray.length()];
+        String[] tempsurname = new String[jsonArray.length()];
         double suma = 0;
+        int imgid[] = new int[jsonArray.length()];
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-            oceny[i] = obj.getString("polski");
-            desc[i] = obj.getString("desc");
+            oceny[i] = obj.getString("grade");
+            desc[i] = obj.getString("description");
             datetime[i] = obj.getString("datetime");
+            tempname[i] = obj.getString("name");
+            tempsurname[i] = obj.getString("surname");
         }
+        String teach = (tempname[0]+" "+tempsurname[0]);
         for (int i = 0; i < jsonArray.length(); i++){
             String temp = "wystawiono: "+datetime[i];
             datetime[i] = temp;
-            suma = suma + Integer.parseInt(oceny[i]);
-            if (oceny[i].equals("1")){
+            suma = suma + Double.parseDouble(oceny[i]);
+            if (oceny[i].equals("1") || oceny[i].equals("1.5")){
                 imgid[i] = R.drawable.grade_1;
             }
-            else if (oceny[i].equals("2")){
+            else if (oceny[i].equals("2") || oceny[i].equals("2.5")){
                 imgid[i] = R.drawable.grade_2;
             }
-            else if (oceny[i].equals("3")){
+            else if (oceny[i].equals("3") || oceny[i].equals("3.5")){
                 imgid[i] = R.drawable.grade_3;
             }
-            else if (oceny[i].equals("4")){
+            else if (oceny[i].equals("4") || oceny[i].equals("4.5")){
                 imgid[i] = R.drawable.grade_4;
             }
-            else if (oceny[i].equals("5")){
+            else if (oceny[i].equals("5") || oceny[i].equals("5.5")){
                 imgid[i] = R.drawable.grade_5;
             }
             else if (oceny[i].equals("6")){
@@ -147,6 +161,7 @@ public class Dane_pol extends AppCompatActivity {
         CustomListView customListView = new CustomListView(this,desc,datetime,imgid);
         listView.setAdapter(customListView);
         srednia.setText("średnia ocen: "+Double.toString(suma));
+        teacher.setText("Prowadzący: "+teach);
     }
 
     @Override

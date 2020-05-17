@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +35,7 @@ public class Notes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
         getJSON("http://10.0.2.2:5050/getnotes.php");
+//        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Uwagi");
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -62,7 +64,8 @@ public class Notes extends AppCompatActivity {
                     con.setDoOutput(true);
                     OutputStream outputStream = con.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("student_id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8");
+                    String post_data = URLEncoder.encode("student_id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8")+"&"
+                            +URLEncoder.encode("action", "UTF-8")+"="+URLEncoder.encode(action, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
@@ -82,9 +85,13 @@ public class Notes extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 try {
-                    loadIntoListView(s);
+                    if(s.contains("brak")){
+                        Toast.makeText(getApplicationContext(), "Brak uwag!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        loadIntoListView(s);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -101,13 +108,17 @@ public class Notes extends AppCompatActivity {
         String[] desc = new String[jsonArray.length()];
         String[] datetime = new String[jsonArray.length()];
         String[] teacher = new String[jsonArray.length()];
+        String[] tempname = new String[jsonArray.length()];
+        String[] tempsurname = new String[jsonArray.length()];
         int imgid[] = new int[jsonArray.length()];
 
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             positiv[i] = obj.getString("positiv");
             desc[i] = obj.getString("text");
-            teacher[i] = obj.getString("teacher");
+            tempname[i] = obj.getString("name");
+            tempsurname[i] = obj.getString("surname");
+            teacher[i] = (tempname[i]+" "+tempsurname[i]);
             datetime[i] = obj.getString("create_time");
         }
         for (int i = 0; i < jsonArray.length(); i++){

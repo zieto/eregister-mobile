@@ -78,8 +78,7 @@ public class Profil extends AppCompatActivity {
                     con.setDoOutput(true);
                     OutputStream outputStream = con.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    // zamien id na user_id
-                    String post_data = URLEncoder.encode("id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8")+"&"
+                    String post_data = URLEncoder.encode("user_id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8")+"&"
                             +URLEncoder.encode("action", "UTF-8")+"="+URLEncoder.encode(action, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
