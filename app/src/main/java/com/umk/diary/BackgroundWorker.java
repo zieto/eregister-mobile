@@ -57,6 +57,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
                 w.result = bufferedReader.readLine();
                 w.role = bufferedReader.readLine();
                 w.sid = bufferedReader.readLine();
+                w.morethanonestudent = bufferedReader.readLine();
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
@@ -105,25 +106,48 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
             builder.setPositiveButton("OK",null);
             final AlertDialog dialog = builder.create();
             dialog.show();
-            final Intent i = new Intent(context, Menu.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            new CountDownTimer(5000, 100) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    if(!(dialog.isShowing())){
-                        this.cancel();
-                        context.startActivity(i);
+            if(w.morethanonestudent.contains("double")){
+                final Intent i = new Intent(context, SelectStudent.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                new CountDownTimer(5000, 100) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        if(!(dialog.isShowing())){
+                            this.cancel();
+                            context.startActivity(i);
+                        }
                     }
-                }
 
-                @Override
-                public void onFinish() {
-                    context.startActivity(i);
-                    dialog.dismiss();
-                }
-            }.start();
+                    @Override
+                    public void onFinish() {
+                        context.startActivity(i);
+                        dialog.dismiss();
+                    }
+                }.start();
+            }
+            else {
+                final Intent i = new Intent(context, Menu.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                new CountDownTimer(5000, 100) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        if(!(dialog.isShowing())){
+                            this.cancel();
+                            context.startActivity(i);
+                        }
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        context.startActivity(i);
+                        dialog.dismiss();
+                    }
+                }.start();
+            }
 
         }
 
@@ -141,4 +165,5 @@ class Wrapper{
     String result;
     String role;
     String sid;
+    String morethanonestudent;
 }

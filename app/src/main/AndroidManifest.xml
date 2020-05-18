@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".grades.Dane_plas"></activity>
+        <activity android:name=".SelectStudent"></activity>
+        <activity android:name=".grades.Dane_plas" />
         <activity android:name=".grades.Dane_muz" />
         <activity android:name=".grades.Dane_wos" />
         <activity android:name=".grades.Dane_his" />

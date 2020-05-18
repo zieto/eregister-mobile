@@ -133,4 +133,5 @@ public class Tuesday extends Fragment {
         ListView listView = getView().findViewById(R.id.listView);
         listView.setAdapter(customListView);
     }
+
 }
