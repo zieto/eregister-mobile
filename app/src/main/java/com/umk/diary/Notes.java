@@ -33,6 +33,11 @@ public class Notes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("id","");
+        String token = sharedPreferences.getString("token","");
+        Verification verification = new Verification(this);
+        verification.execute("verification",id,token);
         setContentView(R.layout.activity_notes);
         getJSON("http://10.0.2.2:5050/getnotes.php");
 //        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");

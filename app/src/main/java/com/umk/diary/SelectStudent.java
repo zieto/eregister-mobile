@@ -31,6 +31,7 @@ public class SelectStudent extends AppCompatActivity {
     public static final String MyPREFERENCES = "myprefs";
     public static final String value = "id";
     public static final String value2 = "sid";
+    public static final String value3 = "student_checked";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,60 +55,70 @@ public class SelectStudent extends AppCompatActivity {
                         if (position == 0){
                             String sid = sharedPreferences.getString("sid0",value2);
                             editor.putString(value2,sid);
+                            editor.putBoolean(value3,true);
                             editor.apply();
                             startActivity(i);
                         }
                         else if (position == 1){
                             String sid = sharedPreferences.getString("sid1",value2);
                             editor.putString(value2,sid);
+                            editor.putBoolean(value3,true);
                             editor.apply();
                             startActivity(i);
                         }
                         else if (position == 2){
                             String sid = sharedPreferences.getString("sid2",value2);
                             editor.putString(value2,sid);
+                            editor.putBoolean(value3,true);
                             editor.apply();
                             startActivity(i);
                         }
                         else if (position == 3){
                             String sid = sharedPreferences.getString("sid3",value2);
                             editor.putString(value2,sid);
+                            editor.putBoolean(value3,true);
                             editor.apply();
                             startActivity(i);
                         }
                         else if (position == 4){
                             String sid = sharedPreferences.getString("sid4",value2);
                             editor.putString(value2,sid);
+                            editor.putBoolean(value3,true);
                             editor.apply();
                             startActivity(i);
                         }
                         else if (position == 5){
                             String sid = sharedPreferences.getString("sid5",value2);
                             editor.putString(value2,sid);
+                            editor.putBoolean(value3,true);
                             editor.apply();
                             startActivity(i);
                         }
                         else if (position == 6){
                             String sid = sharedPreferences.getString("sid6",value2);
                             editor.putString(value2,sid);
+                            editor.putBoolean(value3,true);
                             editor.apply();
                             startActivity(i);
                         }
                         else if (position == 7){
                             String sid = sharedPreferences.getString("sid7",value2);
                             editor.putString(value2,sid);
+                            editor.putBoolean(value3,true);
                             editor.apply();
                             startActivity(i);
                         }
                         else if (position == 8){
                             String sid = sharedPreferences.getString("sid8",value2);
                             editor.putString(value2,sid);
+                            editor.putBoolean(value3,true);
                             editor.apply();
                             startActivity(i);
                         }
                         else if (position == 9){
                             String sid = sharedPreferences.getString("sid9",value2);
                             editor.putString(value2,sid);
+                            editor.putBoolean(value3,true);
                             editor.apply();
                             startActivity(i);
                         }

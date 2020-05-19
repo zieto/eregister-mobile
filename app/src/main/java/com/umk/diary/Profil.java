@@ -40,13 +40,17 @@ public class Profil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("id","");
+        String token = sharedPreferences.getString("token","");
+        Verification verification = new Verification(this);
+        verification.execute("verification",id,token);
         getJSON("http://10.0.2.2:5050/getusermeta.php");
 //        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         setContentView(R.layout.activity_profil);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Twój profil");
         actionBar.setDisplayHomeAsUpEnabled(true);
-        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         email = sharedPreferences.getString("email","");
         imageView = findViewById(R.id.imageView);
         nameTextView = findViewById(R.id.nameTextView);

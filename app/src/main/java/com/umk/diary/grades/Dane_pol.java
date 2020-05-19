@@ -40,6 +40,11 @@ public class Dane_pol extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
+        String id = sharedPreferences.getString("id","");
+        String token = sharedPreferences.getString("token","");
+        VerificationGrades verification = new VerificationGrades(this);
+        verification.execute("verification",id,token);
         getJSON("http://10.0.2.2:5050/getdata.php");
 //        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         setContentView(R.layout.activity_dane_pol);
@@ -120,15 +125,18 @@ public class Dane_pol extends AppCompatActivity {
         JSONArray jsonArray = new JSONArray(json);
         String[] oceny = new String[jsonArray.length()];
         String[] desc = new String[jsonArray.length()];
+        String[] weight = new String[jsonArray.length()];
         String[] datetime = new String[jsonArray.length()];
         String[] tempname = new String[jsonArray.length()];
         String[] tempsurname = new String[jsonArray.length()];
         double suma = 0;
+        double sumawag = 0;
         int imgid[] = new int[jsonArray.length()];
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             oceny[i] = obj.getString("grade");
             desc[i] = obj.getString("description");
+            weight[i] = obj.getString("weight");
             datetime[i] = obj.getString("datetime");
             tempname[i] = obj.getString("name");
             tempsurname[i] = obj.getString("surname");
@@ -137,7 +145,8 @@ public class Dane_pol extends AppCompatActivity {
         for (int i = 0; i < jsonArray.length(); i++){
             String temp = "wystawiono: "+datetime[i];
             datetime[i] = temp;
-            suma = suma + Double.parseDouble(oceny[i]);
+            suma = suma + Double.parseDouble(oceny[i])*Double.parseDouble(weight[i]);
+            sumawag = sumawag + Double.parseDouble(weight[i]);
             if (oceny[i].equals("1") || oceny[i].equals("1.5")){
                 imgid[i] = R.drawable.grade_1;
             }
@@ -157,11 +166,12 @@ public class Dane_pol extends AppCompatActivity {
                 imgid[i] = R.drawable.grade_6;
             }
         }
-        suma = suma/jsonArray.length();
+        suma = suma/sumawag;
         CustomListView customListView = new CustomListView(this,desc,datetime,imgid);
         listView.setAdapter(customListView);
-        srednia.setText("średnia ocen: "+Double.toString(suma));
+        srednia.setText("średnia ocen: "+String.format("%.2f", suma));
         teacher.setText("Prowadzący: "+teach);
+
     }
 
     @Override
