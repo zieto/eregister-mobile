@@ -26,10 +26,10 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_margin="?actionBarSize"
-            android:src="@drawable/logo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="?actionBarSize"
+            android:src="@drawable/logo" />
 
         <EditText
             android:id="@+id/emailET"
@@ -52,6 +52,7 @@
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
             android:hint="Hasło"
+            android:maxLines="1"
             android:inputType="textPassword"
             android:layout_margin="20dp"
             android:layout_width="match_parent"

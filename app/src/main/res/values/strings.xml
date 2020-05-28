@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">eDiary</string>
+    <string name="app_name">eRegister</string>
     <string name="title_activity_menu">Menu</string>
     <string name="title_activity_settings">Settings</string>
 
@@ -32,7 +32,7 @@
     <string name="tab_text_4">CZ</string>
     <string name="tab_text_5">PT</string>
     <string name="autoinfo">Przy zamknięciu aplikacji użytkownik zostanie wylogowany!</string>
-    <string name="info">Aplikacja eDiary powstała jako mobilna wersja aplikacji webowej o tej samej nazwie.
+    <string name="info">Aplikacja eRegister powstała jako mobilna wersja aplikacji webowej o tej samej nazwie.
     Jej zadaniem jest udostępnienie szybkiego podglądu danych na urządzeniu mobilnym dla ucznia/rodzica.
     </string>
     <string name="info2">Aplikacja jest częścią projektu zespołowego studentów Niestacjonarnych Studiów Inżynierskich Informatyki

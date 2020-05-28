@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.umk.diary">
+    package="com.umk.register">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".ApplicationClass"
+        android:name="com.umk.register.ApplicationClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,39 +13,39 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SelectStudent"></activity>
-        <activity android:name=".grades.Dane_plas" />
-        <activity android:name=".grades.Dane_muz" />
-        <activity android:name=".grades.Dane_wos" />
-        <activity android:name=".grades.Dane_his" />
-        <activity android:name=".grades.Dane_wf" />
-        <activity android:name=".grades.Dane_rel" />
-        <activity android:name=".grades.Dane_che" />
-        <activity android:name=".grades.Dane_prz" />
-        <activity android:name=".grades.Dane_geo" />
-        <activity android:name=".grades.Dane_inf" />
-        <activity android:name=".grades.Dane_fiz" />
-        <activity android:name=".grades.Dane_bio" />
-        <activity android:name=".About" />
-        <activity android:name=".Notes" />
+        <activity android:name="com.umk.register.SelectStudent"></activity>
+        <activity android:name="com.umk.register.grades.Dane_plas" />
+        <activity android:name="com.umk.register.grades.Dane_muz" />
+        <activity android:name="com.umk.register.grades.Dane_wos" />
+        <activity android:name="com.umk.register.grades.Dane_his" />
+        <activity android:name="com.umk.register.grades.Dane_wf" />
+        <activity android:name="com.umk.register.grades.Dane_rel" />
+        <activity android:name="com.umk.register.grades.Dane_che" />
+        <activity android:name="com.umk.register.grades.Dane_prz" />
+        <activity android:name="com.umk.register.grades.Dane_geo" />
+        <activity android:name="com.umk.register.grades.Dane_inf" />
+        <activity android:name="com.umk.register.grades.Dane_fiz" />
+        <activity android:name="com.umk.register.grades.Dane_bio" />
+        <activity android:name="com.umk.register.About" />
+        <activity android:name="com.umk.register.Notes" />
         <activity
-            android:name=".schedules.PlanZajec"
+            android:name="com.umk.register.schedules.PlanZajec"
             android:label="@string/title_activity_plan_zajec"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Profil" />
+        <activity android:name="com.umk.register.Profil" />
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.umk.register.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".Menu"
+            android:name="com.umk.register.Menu"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".grades.Dane_mat" />
-        <activity android:name=".grades.Dane_ang" />
-        <activity android:name=".ListaPrzedmiotow" />
-        <activity android:name=".grades.Dane_pol" />
+        <activity android:name="com.umk.register.grades.Dane_mat" />
+        <activity android:name="com.umk.register.grades.Dane_ang" />
+        <activity android:name="com.umk.register.ListaPrzedmiotow" />
+        <activity android:name="com.umk.register.grades.Dane_pol" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.umk.register.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,8 +17,8 @@
         <Preference
             android:title="Zmień ucznia">
             <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.umk.diary"
-                android:targetClass="com.umk.diary.SelectStudent"
+                android:targetPackage="com.umk.register"
+                android:targetClass="com.umk.register.SelectStudent"
                 />
 
         </Preference>
@@ -30,8 +30,8 @@
         <Preference
             android:title="O aplikacji">
             <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.umk.diary"
-                android:targetClass="com.umk.diary.About"
+                android:targetPackage="com.umk.register"
+                android:targetClass="com.umk.register.About"
                 />
         </Preference>
 
