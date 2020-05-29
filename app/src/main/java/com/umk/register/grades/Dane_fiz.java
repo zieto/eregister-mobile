@@ -133,7 +133,7 @@ public class Dane_fiz extends AppCompatActivity {
             oceny[i] = obj.getString("grade");
             desc[i] = obj.getString("description");
             weight[i] = obj.getString("weight");
-            datetime[i] = obj.getString("datetime");
+            datetime[i] = obj.getString("created_at");
             tempname[i] = obj.getString("name");
             tempsurname[i] = obj.getString("surname");
         }

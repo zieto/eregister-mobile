@@ -45,8 +45,8 @@ public class Dane_pol extends AppCompatActivity {
         String token = sharedPreferences.getString("token","");
         VerificationGrades verification = new VerificationGrades(this);
         verification.execute("verification",id,token);
-        getJSON("http://10.0.2.2:5050/getdata.php");
-//        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
+//        getJSON("http://10.0.2.2:5050/getdata.php");
+        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         setContentView(R.layout.activity_dane_pol);
         listView = findViewById(R.id.listView);
         srednia = findViewById(R.id.srednia);
@@ -137,7 +137,7 @@ public class Dane_pol extends AppCompatActivity {
             oceny[i] = obj.getString("grade");
             desc[i] = obj.getString("description");
             weight[i] = obj.getString("weight");
-            datetime[i] = obj.getString("datetime");
+            datetime[i] = obj.getString("created_at");
             tempname[i] = obj.getString("name");
             tempsurname[i] = obj.getString("surname");
         }

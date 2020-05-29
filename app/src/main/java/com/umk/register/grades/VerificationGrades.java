@@ -30,7 +30,8 @@ public class VerificationGrades extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... voids) {
         String type = voids[0];
-        String login_url = "http://10.0.2.2:5050/verification.php";
+//        String login_url = "http://10.0.2.2:5050/verification.php";
+        String login_url = "http://krzyzunlukas.nazwa.pl/diary-api/api.php";
         String action = "verification";
         if(type.equals("verification")) {
             try {

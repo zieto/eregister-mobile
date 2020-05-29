@@ -45,8 +45,8 @@ public class Profil extends AppCompatActivity {
         String token = sharedPreferences.getString("token","");
         Verification verification = new Verification(this);
         verification.execute("verification",id,token);
-        getJSON("http://10.0.2.2:5050/getusermeta.php");
-//        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
+//        getJSON("http://10.0.2.2:5050/getusermeta.php");
+        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         setContentView(R.layout.activity_profil);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Twój profil");
@@ -131,7 +131,7 @@ public class Profil extends AppCompatActivity {
         phoneTextView.setText(metadata[0]);
         metadata[0] = obj.getString("avatar");
         avatar = metadata[0];
-        String imgURL  = "http://www.diary.co.pl/upload/"+avatar;
+        String imgURL  = "http://www.eregister.co.pl/upload/avatars/"+avatar;
         new DownloadImageTask(imageView).execute(imgURL);
     }
 

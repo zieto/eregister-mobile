@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +38,8 @@ public class SelectStudent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getJSON("http://10.0.2.2:5050/getstudents.php");
-//        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
+//        getJSON("http://10.0.2.2:5050/getstudents.php");
+        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         setContentView(R.layout.activity_select_student);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Wybierz ucznia");
@@ -174,7 +176,12 @@ public class SelectStudent extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 try {
+                    if(s.contains("brak")){
+                        Toast.makeText(getApplicationContext(), "Brak możliwości zmiany wyświetlanego ucznia!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
                         loadIntoListView(s);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

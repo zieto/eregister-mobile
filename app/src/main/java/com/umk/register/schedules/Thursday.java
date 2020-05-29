@@ -41,8 +41,8 @@ public class Thursday extends Fragment {
 
         View view = inflater.inflate(R.layout.frag_layout,container,false);
         ListView listView = view.findViewById(R.id.listView);
-        getJSON("http://10.0.2.2:5050/getschedule.php");
-//        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
+//        getJSON("http://10.0.2.2:5050/getschedule.php");
+        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         return view;
     }
 
@@ -112,21 +112,28 @@ public class Thursday extends Fragment {
 
     private void loadIntoListView(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
-        String[] start = new String[jsonArray.length()];
-        String[] end = new String[jsonArray.length()];
+        String[] start_hour = new String[jsonArray.length()];
+        String[] start_minute = new String[jsonArray.length()];
+        String[] end_hour = new String[jsonArray.length()];
+        String[] end_minute = new String[jsonArray.length()];
+        String[] full_start = new String[jsonArray.length()];
+        String[] full_end = new String[jsonArray.length()];
         String[] subject = new String[jsonArray.length()];
         String[] room = new String[jsonArray.length()];
 
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-            start[i] = obj.getString("start");
-            end[i] = obj.getString("end");
+            start_hour[i] = obj.getString("start_hour");
+            start_minute[i] = obj.getString("start_minute");
+            end_hour[i] = obj.getString("end_hour");
+            end_minute[i] = obj.getString("end_minute");
+            full_start[i] = (start_hour[i]+":"+start_minute[i]);
+            full_end[i] = (end_hour[i]+":"+end_minute[i]);
             subject[i] = obj.getString("subject");
             room[i] = obj.getString("classroom");
         }
 
-
-        CustomListViewSchedule customListView = new CustomListViewSchedule(getActivity(),start,end,subject,room);
+        CustomListViewSchedule customListView = new CustomListViewSchedule(getActivity(),full_start,full_end,subject,room);
         ListView listView = getView().findViewById(R.id.listView);
         listView.setAdapter(customListView);
     }

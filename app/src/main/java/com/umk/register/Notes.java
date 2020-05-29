@@ -39,8 +39,8 @@ public class Notes extends AppCompatActivity {
         Verification verification = new Verification(this);
         verification.execute("verification",id,token);
         setContentView(R.layout.activity_notes);
-        getJSON("http://10.0.2.2:5050/getnotes.php");
-//        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
+//        getJSON("http://10.0.2.2:5050/getnotes.php");
+        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Uwagi");
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -124,7 +124,7 @@ public class Notes extends AppCompatActivity {
             tempname[i] = obj.getString("name");
             tempsurname[i] = obj.getString("surname");
             teacher[i] = (tempname[i]+" "+tempsurname[i]);
-            datetime[i] = obj.getString("create_time");
+            datetime[i] = obj.getString("created_at");
         }
         for (int i = 0; i < jsonArray.length(); i++){
             String temp = "wystawiono: "+datetime[i];

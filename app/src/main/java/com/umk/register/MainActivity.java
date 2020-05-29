@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("token", password);
         editor.apply();
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type,email,MD5_Hash_String);
+        backgroundWorker.execute(type,email,password);
 
     }
 
     public void onClick(View view){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://diary.co.pl"));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://eregister.co.pl"));
         startActivity(browserIntent);
     }
 

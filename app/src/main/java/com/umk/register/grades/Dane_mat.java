@@ -42,8 +42,8 @@ public class Dane_mat extends AppCompatActivity {
         String token = sharedPreferences.getString("token","");
         VerificationGrades verification = new VerificationGrades(this);
         verification.execute("verification",id,token);
-        getJSON("http://10.0.2.2:5050/getdata.php");
-//        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
+//        getJSON("http://10.0.2.2:5050/getdata.php");
+        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         setContentView(R.layout.activity_dane_mat);
         listView = findViewById(R.id.listView);
         srednia = findViewById(R.id.srednia);
@@ -68,7 +68,7 @@ public class Dane_mat extends AppCompatActivity {
             protected String doInBackground(Void... voids) {
                 sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString(value,"");
-                String action = "get_data";
+                String action = "get_grades";
                 String subject_id = "1";
                 try {
                     URL url = new URL(urlWebService);
@@ -133,7 +133,7 @@ public class Dane_mat extends AppCompatActivity {
             oceny[i] = obj.getString("grade");
             desc[i] = obj.getString("description");
             weight[i] = obj.getString("weight");
-            datetime[i] = obj.getString("datetime");
+            datetime[i] = obj.getString("created_at");
             tempname[i] = obj.getString("name");
             tempsurname[i] = obj.getString("surname");
         }
