@@ -33,10 +33,10 @@
     <string name="tab_text_5">PT</string>
     <string name="autoinfo">Przy zamknięciu aplikacji użytkownik zostanie wylogowany!</string>
     <string name="info">Aplikacja eRegister powstała jako mobilna wersja aplikacji webowej o tej samej nazwie.
-    Jej zadaniem jest udostępnienie szybkiego podglądu danych na urządzeniu mobilnym dla ucznia/rodzica.
+        Jej zadaniem jest udostępnienie szybkiego podglądu danych na urządzeniu mobilnym dla ucznia/rodzica.
     </string>
     <string name="info2">Aplikacja jest częścią projektu zespołowego studentów Niestacjonarnych Studiów Inżynierskich Informatyki
     Wydziału Matematyki i Informatyki na Uniwersytecie Mikołaja Kopernika w Toruniu.</string>
-    <string name="info3">W aplikacji wykorzystano na licencji OpenSource ikony ze strony</string>
+    <string name="info3">W aplikacji mobilnej wykorzystano ikony ze strony</string>
 
 </resources>

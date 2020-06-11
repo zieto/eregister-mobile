@@ -141,6 +141,9 @@ public class Dane_plas extends AppCompatActivity {
         for (int i = 0; i < jsonArray.length(); i++){
             String temp = "wystawiono: "+datetime[i];
             datetime[i] = temp;
+            if(desc[i].equals("null")){
+                desc[i]="brak opisu";
+            }
             suma = suma + Double.parseDouble(oceny[i])*Double.parseDouble(weight[i]);
             sumawag = sumawag + Double.parseDouble(weight[i]);
             if (oceny[i].equals("1") || oceny[i].equals("1.5")){

@@ -61,7 +61,8 @@ public class Wednesday extends Fragment {
                 sharedPreferences = getContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString(value,"");
                 String day = "3";
-                String action = "get_schedule";
+                //String action = "get_schedule";
+                String action = "backup_schedule";
                 try {
                     URL url = new URL(urlWebService);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -94,6 +95,8 @@ public class Wednesday extends Fragment {
                 super.onPostExecute(s);
                 try {
                     if(s.contains("brak")){
+                        //TODO
+                        //fix showing Toast on neighbour fragment
                         Toast.makeText(getActivity().getApplicationContext(), "Brak planu zajęć!", Toast.LENGTH_SHORT).show();
                     }
                     else {
@@ -126,10 +129,25 @@ public class Wednesday extends Fragment {
             start_minute[i] = obj.getString("start_minute");
             end_hour[i] = obj.getString("end_hour");
             end_minute[i] = obj.getString("end_minute");
+            if (start_minute[i].equals("5")){
+                start_minute[i]="05";
+            }
+            if (start_minute[i].equals("0")){
+                start_minute[i]="00";
+            }
+            end_hour[i] = obj.getString("end_hour");
+            end_minute[i] = obj.getString("end_minute");
+            if (end_minute[i].equals("5")){
+                end_minute[i]="05";
+            }
+            if (end_minute[i].equals("0")){
+                end_minute[i]="00";
+            }
             full_start[i] = (start_hour[i]+":"+start_minute[i]);
             full_end[i] = (end_hour[i]+":"+end_minute[i]);
-            subject[i] = obj.getString("subject");
-            room[i] = obj.getString("classroom");
+            subject[i] = obj.getString("name");
+            //room[i] = obj.getString("classroom");
+            room[i] = obj.getString("classroom_id");
         }
 
         CustomListViewSchedule customListView = new CustomListViewSchedule(getActivity(),full_start,full_end,subject,room);

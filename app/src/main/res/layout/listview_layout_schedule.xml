@@ -55,7 +55,7 @@
                 android:text="Język polski"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:textSize="30sp"/>
+                android:textSize="26sp"/>
 
 
         </LinearLayout>
