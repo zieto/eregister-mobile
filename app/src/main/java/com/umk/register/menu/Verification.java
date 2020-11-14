@@ -1,9 +1,11 @@
-package com.umk.register.grades;
+package com.umk.register.menu;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+
 import com.umk.register.login.LoginActivity;
 
 import java.io.BufferedReader;
@@ -18,13 +20,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class VerificationGrades extends AsyncTask<String, Void, String> {
+public class Verification extends AsyncTask<String, Void, String> {
 
     Context context;
+    AlertDialog alertDialog;
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "myprefs";
     public static final String value = "id";
-    VerificationGrades(Context ctx){
+    Verification (Context ctx){
         context = ctx;
     }
     @Override

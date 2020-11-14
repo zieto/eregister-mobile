@@ -1,4 +1,4 @@
-package com.umk.register.grades;
+package com.umk.register.notes;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,13 +18,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class VerificationGrades extends AsyncTask<String, Void, String> {
+public class VerificationNotes extends AsyncTask<String, Void, String> {
 
     Context context;
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "myprefs";
     public static final String value = "id";
-    VerificationGrades(Context ctx){
+    VerificationNotes(Context ctx){
         context = ctx;
     }
     @Override

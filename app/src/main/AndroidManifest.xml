@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.umk.register.ApplicationClass"
+        android:name="com.umk.register.notifications.ApplicationClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,39 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.umk.register.SelectStudent"></activity>
-        <activity android:name="com.umk.register.grades.Dane_plas" />
-        <activity android:name="com.umk.register.grades.Dane_muz" />
-        <activity android:name="com.umk.register.grades.Dane_wos" />
-        <activity android:name="com.umk.register.grades.Dane_his" />
-        <activity android:name="com.umk.register.grades.Dane_wf" />
-        <activity android:name="com.umk.register.grades.Dane_rel" />
-        <activity android:name="com.umk.register.grades.Dane_che" />
-        <activity android:name="com.umk.register.grades.Dane_prz" />
-        <activity android:name="com.umk.register.grades.Dane_geo" />
-        <activity android:name="com.umk.register.grades.Dane_inf" />
-        <activity android:name="com.umk.register.grades.Dane_fiz" />
-        <activity android:name="com.umk.register.grades.Dane_bio" />
-        <activity android:name="com.umk.register.About" />
-        <activity android:name="com.umk.register.Notes" />
+        <activity android:name="com.umk.register.menu.settings.SelectStudent"></activity>
+        <activity android:name="com.umk.register.grades.Grades"/>
+        <activity android:name="com.umk.register.menu.settings.About" />
+        <activity android:name="com.umk.register.notes.Notes" />
         <activity
-            android:name="com.umk.register.schedules.PlanZajec"
+            android:name="com.umk.register.schedules.Schedule"
             android:label="@string/title_activity_plan_zajec"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.umk.register.Profil" />
+        <activity android:name="com.umk.register.menu.Profile" />
         <activity
-            android:name="com.umk.register.SettingsActivity"
+            android:name="com.umk.register.menu.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name="com.umk.register.Menu"
+            android:name="com.umk.register.menu.Menu"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.umk.register.grades.Dane_mat" />
-        <activity android:name="com.umk.register.grades.Dane_ang" />
-        <activity android:name="com.umk.register.ListaPrzedmiotow" />
-        <activity android:name="com.umk.register.grades.Dane_pol" />
+        <activity android:name="com.umk.register.menu.GradesList" />
         <activity
-            android:name="com.umk.register.MainActivity"
+            android:name="com.umk.register.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

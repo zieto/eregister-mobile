@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
-import com.umk.register.MainActivity;
+import com.umk.register.login.LoginActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -88,7 +88,7 @@ public class VerificationSchedule extends AsyncTask<String, Void, String> {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.apply();
-            final Intent i = new Intent(context, MainActivity.class);
+            final Intent i = new Intent(context, LoginActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
