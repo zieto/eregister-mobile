@@ -184,6 +184,7 @@ public class SelectStudent extends AppCompatActivity {
                     }
                     else {
                         loadIntoListView(s);
+                        Toast.makeText(getApplicationContext(), "W każdej chwili możesz zmienić wyświetlanego ucznia w ustawieniach!", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -30,7 +30,7 @@ import java.net.URLEncoder;
 public class Grades extends AppCompatActivity {
 
     ListView listView;
-    TextView srednia, teacher;
+    TextView avg, teacher;
     SharedPreferences sharedPreferences;
     String grade_name, grade_id;
 
@@ -54,7 +54,7 @@ public class Grades extends AppCompatActivity {
         grade_name = i.getStringExtra("grade_name");
         grade_id = i.getStringExtra("grade_id");
         listView = findViewById(R.id.listView);
-        srednia = findViewById(R.id.srednia);
+        avg = findViewById(R.id.avg);
         teacher = findViewById(R.id.teacher);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(grade_name);
@@ -177,7 +177,7 @@ public class Grades extends AppCompatActivity {
         suma = suma/sumawag;
         CustomListViewGrades customListViewGrades = new CustomListViewGrades(this,desc,datetime,imgid);
         listView.setAdapter(customListViewGrades);
-        srednia.setText("średnia ocen: "+String.format("%.2f", suma));
+        avg.setText("średnia ocen: "+String.format("%.2f", suma));
         teacher.setText("Prowadzący: "+teach);
 
     }

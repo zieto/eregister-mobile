@@ -105,6 +105,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
             editor.putBoolean("parent",parent);
             editor.putString(value,w.result);
             editor.putString("sid",w.sid);
+            editor.putString("moreThanOneStudent",w.morethanonestudent);
             editor.apply();
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Logowanie");
@@ -159,10 +160,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
 
     }
 
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
-    }
 
 
 }

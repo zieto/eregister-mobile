@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.GridLayout;
 
+import com.onesignal.OneSignal;
 import com.umk.register.R;
 import com.umk.register.menu.settings.SettingsActivity;
 import com.umk.register.login.LoginActivity;

@@ -1,7 +1,15 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory app:title="@string/pref_header">
+    <PreferenceCategory app:title="@string/pref_header"
+        app:key="categoryPrefs">
+
+
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            android:defaultValue="true"
+            app:summaryOff="Powiadomienia wyłączone!"
+            app:title="Włącz powiadomienia" />
 
         <SwitchPreferenceCompat
             app:key="autologin"
@@ -9,12 +17,8 @@
             app:summaryOff="@string/autoinfo"
             app:title="Włącz automatyczne logowanie" />
 
-<!--        <SwitchPreferenceCompat-->
-<!--            app:key="notifications"-->
-<!--            android:defaultValue="true"-->
-<!--            app:title="Włącz powiadomienia" />-->
-
         <Preference
+            app:key="changeStudent"
             android:title="Zmień ucznia">
             <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.umk.register"
@@ -25,7 +29,8 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/info_header">
+    <PreferenceCategory app:title="@string/info_header"
+        app:key="categoryInfo">
 
         <Preference
             android:title="O aplikacji">
