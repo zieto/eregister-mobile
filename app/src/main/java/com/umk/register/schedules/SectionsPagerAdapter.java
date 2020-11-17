@@ -1,4 +1,4 @@
-package com.umk.register.schedules.ui.main;
+package com.umk.register.schedules;
 
 import android.content.Context;
 
@@ -9,16 +9,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.umk.register.R;
-import com.umk.register.schedules.Friday;
-import com.umk.register.schedules.Monday;
-import com.umk.register.schedules.Thursday;
-import com.umk.register.schedules.Tuesday;
-import com.umk.register.schedules.Wednesday;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
+
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes

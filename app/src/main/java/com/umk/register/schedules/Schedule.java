@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 
 import com.umk.register.R;
-import com.umk.register.schedules.ui.main.SectionsPagerAdapter;
 
 public class Schedule extends AppCompatActivity {
 

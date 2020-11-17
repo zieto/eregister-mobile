@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.umk.register.menu.Menu;
 import com.umk.register.R;
+import com.umk.register.menu.settings.SelectStudent;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -25,8 +26,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String id = sharedPreferences.getString(value,"");
-        if (id.length() > 0) {
+        Boolean studentChecked = sharedPreferences.getBoolean("student_checked",false);
+        if (id.length() > 0 && studentChecked) {
             Intent i = new Intent(LoginActivity.this, Menu.class);
+            startActivity(i);
+            finish();
+        }
+        if (id.length() > 0 && !studentChecked) {
+            Intent i = new Intent(LoginActivity.this, SelectStudent.class);
             startActivity(i);
             finish();
         }

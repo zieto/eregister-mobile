@@ -97,10 +97,6 @@ public class VerificationSchedule extends AsyncTask<String, Void, String> {
 
     }
 
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
-    }
 
 
 }

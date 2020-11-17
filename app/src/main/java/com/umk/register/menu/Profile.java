@@ -168,7 +168,7 @@ public class Profile extends AppCompatActivity {
     }
 
     private int getResponseCodeForURLUsing(String address, String method) throws IOException {
-        HttpURLConnection.setFollowRedirects(false); // Set follow redirects to false
+        HttpURLConnection.setFollowRedirects(false);
         final URL url = new URL(address);
         HttpURLConnection huc = (HttpURLConnection) url.openConnection();
         huc.setRequestMethod(method);

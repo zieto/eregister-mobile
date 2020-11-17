@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.umk.apka", appContext.getPackageName());
+        assertEquals("com.umk.register", appContext.getPackageName());
     }
 }

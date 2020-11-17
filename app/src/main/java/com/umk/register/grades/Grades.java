@@ -155,20 +155,35 @@ public class Grades extends AppCompatActivity {
             }
             suma = suma + Double.parseDouble(oceny[i])*Double.parseDouble(weight[i]);
             sumawag = sumawag + Double.parseDouble(weight[i]);
-            if (oceny[i].equals("1") || oceny[i].equals("1.5")){
+            if (oceny[i].equals("1")){
                 imgid[i] = R.drawable.grade_1;
             }
-            else if (oceny[i].equals("2") || oceny[i].equals("2.5")){
+            else if (oceny[i].equals("1.5")){
+                imgid[i] = R.drawable.grade_1_5;
+            }
+            else if (oceny[i].equals("2")){
                 imgid[i] = R.drawable.grade_2;
             }
-            else if (oceny[i].equals("3") || oceny[i].equals("3.5")){
+            else if (oceny[i].equals("2.5")){
+                imgid[i] = R.drawable.grade_2_5;
+            }
+            else if (oceny[i].equals("3")){
                 imgid[i] = R.drawable.grade_3;
             }
-            else if (oceny[i].equals("4") || oceny[i].equals("4.5")){
+            else if (oceny[i].equals("3.5")){
+                imgid[i] = R.drawable.grade_3_5;
+            }
+            else if (oceny[i].equals("4")){
                 imgid[i] = R.drawable.grade_4;
             }
-            else if (oceny[i].equals("5") || oceny[i].equals("5.5")){
+            else if (oceny[i].equals("4.5")){
+                imgid[i] = R.drawable.grade_4_5;
+            }
+            else if (oceny[i].equals("5")){
                 imgid[i] = R.drawable.grade_5;
+            }
+            else if (oceny[i].equals("5.5")){
+                imgid[i] = R.drawable.grade_5_5;
             }
             else if (oceny[i].equals("6")){
                 imgid[i] = R.drawable.grade_6;

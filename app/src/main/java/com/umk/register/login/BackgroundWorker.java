@@ -106,6 +106,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
             editor.putString(value,w.result);
             editor.putString("sid",w.sid);
             editor.putString("moreThanOneStudent",w.morethanonestudent);
+            editor.putBoolean("student_checked",true);
             editor.apply();
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Logowanie");
@@ -118,6 +119,8 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                editor.putBoolean("student_checked",false);
+                editor.apply();
                 new CountDownTimer(5000, 100) {
                     @Override
                     public void onTick(long millisUntilFinished) {
