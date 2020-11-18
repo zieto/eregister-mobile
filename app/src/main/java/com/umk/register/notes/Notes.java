@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.umk.register.R;
+import com.umk.register.menu.StudentMeta;
+import com.umk.register.menu.Verification;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,13 +40,19 @@ public class Notes extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id","");
         String token = sharedPreferences.getString("token","");
-        VerificationNotes verification = new VerificationNotes(this);
+        Verification verification = new Verification(this);
         verification.execute("verification",id,token);
+
+        String sid = sharedPreferences.getString("sid","");
+        StudentMeta studentMeta = new StudentMeta(this);
+        studentMeta.execute("student_meta",null,sid);
+
+        String studentName = sharedPreferences.getString("studentName", "");
         setContentView(R.layout.activity_notes);
 //        getJSON("http://10.0.2.2:5050/getnotes.php");
         getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Uwagi");
+        actionBar.setTitle("Uwagi"+" - "+studentName);
         actionBar.setDisplayHomeAsUpEnabled(true);
         listView = findViewById(R.id.listView);
     }

@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.umk.register.R;
+import com.umk.register.menu.Verification;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,7 +46,7 @@ public class Grades extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
         String id = sharedPreferences.getString("id","");
         String token = sharedPreferences.getString("token","");
-        VerificationGrades verification = new VerificationGrades(this);
+        Verification verification = new Verification(this);
         verification.execute("verification",id,token);
 //        getJSON("http://10.0.2.2:5050/getdata.php");
         getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");

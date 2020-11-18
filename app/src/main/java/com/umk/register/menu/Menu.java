@@ -28,12 +28,17 @@ public class Menu extends AppCompatActivity {
     public static final String value = "id";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         gridLayout = findViewById(R.id.mainGrid);
         setSingleEvent(gridLayout);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+        String sid = sharedPreferences.getString("studentName","");
+        StudentMeta studentMeta = new StudentMeta(this);
+        studentMeta.execute("student_meta",null,sid);
 
     }
 

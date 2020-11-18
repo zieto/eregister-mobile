@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 
 import com.umk.register.R;
+import com.umk.register.menu.Verification;
 
 public class Schedule extends AppCompatActivity {
 
@@ -22,7 +23,8 @@ public class Schedule extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id","");
         String token = sharedPreferences.getString("token","");
-        VerificationSchedule verification = new VerificationSchedule(this);
+        String studentName = sharedPreferences.getString("studentName","");
+        Verification verification = new Verification(this);
         verification.execute("verification",id,token);
         setContentView(R.layout.activity_schedule);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
@@ -33,6 +35,7 @@ public class Schedule extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Plan zajęć - "+studentName);
 
     }
 

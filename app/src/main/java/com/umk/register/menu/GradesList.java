@@ -3,6 +3,7 @@ package com.umk.register.menu;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,11 @@ public class GradesList extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences = getSharedPreferences("myprefs",MODE_PRIVATE);
+        String studentName = sharedPreferences.getString("studentName", "");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Oceny"+" - "+studentName);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_grades_list);
         final ListView lista = findViewById(R.id.listView);
 
@@ -41,9 +47,6 @@ public class GradesList extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_1, przedmioty);
         lista.setAdapter(adapter);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Oceny");
-        actionBar.setDisplayHomeAsUpEnabled(true);
 
         lista.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
