@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.GridLayout;
 
-import com.onesignal.OneSignal;
 import com.umk.register.R;
 import com.umk.register.menu.settings.SettingsActivity;
 import com.umk.register.login.LoginActivity;
@@ -91,6 +90,8 @@ public class Menu extends AppCompatActivity {
         public void onClick(DialogInterface dialog, int which) {
             sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
             SharedPreferences.Editor editor  = sharedPreferences.edit();
+            SharedPreferences encryptedSharedPreferences = getSharedPreferences("encryptedData",Context.MODE_PRIVATE);
+            SharedPreferences.Editor encryptedEditor = encryptedSharedPreferences.edit();
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     Intent i = new Intent(Menu.this, LoginActivity.class);
@@ -99,7 +100,9 @@ public class Menu extends AppCompatActivity {
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.putExtra("EXIT",true);
                     startActivity(i);
+                    encryptedEditor.clear();
                     editor.clear();
+                    encryptedEditor.apply();
                     editor.apply();
                     finish();
                     break;
@@ -118,6 +121,10 @@ public class Menu extends AppCompatActivity {
         sharedPreferences2 = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
         final SharedPreferences.Editor editor2 = sharedPreferences2.edit();
         final boolean pref_auto;
+
+        SharedPreferences encryptedSharedPreferences = getSharedPreferences("encryptedData",Context.MODE_PRIVATE);
+        final SharedPreferences.Editor encryptedEditor = encryptedSharedPreferences.edit();
+
         pref_auto = sharedPreferences.getBoolean("autologin",true);
         new AlertDialog.Builder(this)
                 .setMessage("Na pewno chcesz wyjść z aplikacji?")
@@ -125,8 +132,10 @@ public class Menu extends AppCompatActivity {
                 .setPositiveButton("Tak", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
-                        if (pref_auto==false){
+                        if (!pref_auto){
+                            encryptedEditor.clear();
                             editor2.clear();
+                            encryptedEditor.clear();
                             editor2.apply();
                         }
                     }

@@ -2,6 +2,8 @@ package com.umk.register.menu;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.umk.register.R;
+import com.umk.register.app.Verification;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +32,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.GeneralSecurityException;
 
 public class Profile extends AppCompatActivity {
 
@@ -37,23 +41,48 @@ public class Profile extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     TextView nameTextView, emailTextView, phoneTextView;
     ImageView imageView;
-    public String email, name, surname, phone, avatar;
+    public String email, name, surname, avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id","");
-        String token = sharedPreferences.getString("token","");
+
+        String token ="";
+        Context context = getApplicationContext();
+        try {
+            MasterKey mainKey = new MasterKey.Builder(context)
+                    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                    .build();
+
+            SharedPreferences encryptedSharedPreferences = EncryptedSharedPreferences.create(
+                    context,
+                    "encryptedData",
+                    mainKey,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            );
+
+            token = encryptedSharedPreferences.getString("token","");
+            email = encryptedSharedPreferences.getString("email","");
+
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Verification verification = new Verification(this);
         verification.execute("verification",id,token);
-//        getJSON("http://10.0.2.2:5050/getusermeta.php");
+
         getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
+
         setContentView(R.layout.activity_profile);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Twój profil");
         actionBar.setDisplayHomeAsUpEnabled(true);
-        email = sharedPreferences.getString("email","");
+
         imageView = findViewById(R.id.imageView);
         nameTextView = findViewById(R.id.nameTextView);
         emailTextView = findViewById(R.id.emailTextView);

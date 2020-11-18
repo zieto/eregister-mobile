@@ -1,6 +1,5 @@
-package com.umk.register.menu;
+package com.umk.register.app;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,7 +22,6 @@ import java.net.URLEncoder;
 public class Verification extends AsyncTask<String, Void, String> {
 
     Context context;
-    AlertDialog alertDialog;
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "myprefs";
     public static final String value = "id";
@@ -33,7 +31,6 @@ public class Verification extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... voids) {
         String type = voids[0];
-//        String login_url = "http://10.0.2.2:5050/verification.php";
         String login_url = "http://krzyzunlukas.nazwa.pl/diary-api/api.php";
         String action = "verification";
         if(type.equals("verification")) {
@@ -90,6 +87,10 @@ public class Verification extends AsyncTask<String, Void, String> {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.apply();
+            sharedPreferences = context.getSharedPreferences("encryptedData", Context.MODE_PRIVATE);
+            sharedPreferences.edit()
+                    .clear()
+                    .apply();
             final Intent i = new Intent(context, LoginActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -1,6 +1,9 @@
 package com.umk.register.login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,8 +16,8 @@ import com.umk.register.menu.Menu;
 import com.umk.register.R;
 import com.umk.register.menu.settings.SelectStudent;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -47,13 +50,33 @@ public class LoginActivity extends AppCompatActivity {
         String email = EmailET.getText().toString();
         String password = PasswordET.getText().toString();
         String type = "login";
-        String String_to_MD5 = password;
-        String MD5_Hash_String = md5(String_to_MD5);
-        sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor  = sharedPreferences.edit();
-        editor.putString("email", email);
-        editor.putString("token", password);
-        editor.apply();
+
+        Context context = getApplicationContext();
+        try {
+            MasterKey mainKey = new MasterKey.Builder(context)
+                    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                    .build();
+
+            SharedPreferences encryptedSharedPreferences = EncryptedSharedPreferences.create(
+                    context,
+                    "encryptedData",
+                    mainKey,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            );
+
+            encryptedSharedPreferences
+                    .edit()
+                    .putString("token",password)
+                    .putString("email",email)
+                    .apply();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         backgroundWorker.execute(type,email,password);
 
@@ -65,30 +88,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public static String md5(final String s) {
-        final String MD5 = "MD5";
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuilder hexString = new StringBuilder();
-            for (byte aMessageDigest : messageDigest) {
-                String h = Integer.toHexString(0xFF & aMessageDigest);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
-            }
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
 
 
 

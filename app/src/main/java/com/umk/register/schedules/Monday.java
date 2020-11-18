@@ -42,7 +42,6 @@ public class Monday extends Fragment {
 
         View view = inflater.inflate(R.layout.frag_layout,container,false);
         ListView listView = view.findViewById(R.id.listView);
-//        getJSON("http://10.0.2.2:5050/getschedule.php");
         getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         return view;
     }

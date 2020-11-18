@@ -42,7 +42,6 @@ public class Wednesday extends Fragment {
 
         View view = inflater.inflate(R.layout.frag_layout,container,false);
         ListView listView = view.findViewById(R.id.listView);
-//        getJSON("http://10.0.2.2:5050/getschedule.php");
         getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         return view;
     }
@@ -61,7 +60,6 @@ public class Wednesday extends Fragment {
                 sharedPreferences = getContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString(value,"");
                 String day = "3";
-                //String action = "get_schedule";
                 String action = "backup_schedule";
                 try {
                     URL url = new URL(urlWebService);
@@ -146,7 +144,6 @@ public class Wednesday extends Fragment {
             full_start[i] = (start_hour[i]+":"+start_minute[i]);
             full_end[i] = (end_hour[i]+":"+end_minute[i]);
             subject[i] = obj.getString("name");
-            //room[i] = obj.getString("classroom");
             room[i] = obj.getString("classroom_id");
         }
 

@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import com.umk.register.R;
-import com.umk.register.menu.Verification;
+import com.umk.register.app.Verification;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,12 +23,14 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.GeneralSecurityException;
 
 public class Grades extends AppCompatActivity {
 
@@ -43,13 +47,36 @@ public class Grades extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String token ="";
+        Context context = getApplicationContext();
+        try {
+            MasterKey mainKey = new MasterKey.Builder(context)
+                    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                    .build();
+
+            SharedPreferences encryptedSharedPreferences = EncryptedSharedPreferences.create(
+                    context,
+                    "encryptedData",
+                    mainKey,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            );
+
+            token = encryptedSharedPreferences.getString("token","");
+
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         sharedPreferences = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
         String id = sharedPreferences.getString("id","");
-        String token = sharedPreferences.getString("token","");
         Verification verification = new Verification(this);
         verification.execute("verification",id,token);
-//        getJSON("http://10.0.2.2:5050/getdata.php");
+
         getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
+
         setContentView(R.layout.activity_grades);
         Intent i = getIntent();
         grade_name = i.getStringExtra("grade_name");
@@ -57,6 +84,7 @@ public class Grades extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         avg = findViewById(R.id.avg);
         teacher = findViewById(R.id.teacher);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(grade_name);
         actionBar.setDisplayHomeAsUpEnabled(true);

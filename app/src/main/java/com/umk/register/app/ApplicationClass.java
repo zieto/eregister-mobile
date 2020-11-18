@@ -3,6 +3,8 @@ package com.umk.register.app;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.security.crypto.MasterKey;
+
 import com.onesignal.OneSignal;
 
 public class ApplicationClass extends Application {
@@ -17,7 +19,10 @@ public class ApplicationClass extends Application {
                     .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                     .unsubscribeWhenNotificationsAreDisabled(true)
                     .init();
+
         }
+
+
 
     public static Context getAppContext(){
         return ApplicationClass.context;

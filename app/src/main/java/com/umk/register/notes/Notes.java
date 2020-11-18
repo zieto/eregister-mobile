@@ -2,6 +2,8 @@ package com.umk.register.notes;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,7 +14,7 @@ import android.widget.Toast;
 
 import com.umk.register.R;
 import com.umk.register.menu.StudentMeta;
-import com.umk.register.menu.Verification;
+import com.umk.register.app.Verification;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,12 +22,14 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.GeneralSecurityException;
 
 public class Notes extends AppCompatActivity {
 
@@ -39,7 +43,28 @@ public class Notes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id","");
-        String token = sharedPreferences.getString("token","");
+        String token ="";
+        Context context = getApplicationContext();
+        try {
+            MasterKey mainKey = new MasterKey.Builder(context)
+                    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                    .build();
+
+            SharedPreferences encryptedSharedPreferences = EncryptedSharedPreferences.create(
+                    context,
+                    "encryptedData",
+                    mainKey,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            );
+
+            token = encryptedSharedPreferences.getString("token","");
+
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Verification verification = new Verification(this);
         verification.execute("verification",id,token);
 
