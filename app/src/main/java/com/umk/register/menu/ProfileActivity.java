@@ -1,4 +1,4 @@
-package com.umk.register.notes;
+package com.umk.register.menu;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,13 +7,15 @@ import androidx.security.crypto.MasterKey;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ListView;
-import android.widget.Toast;
+
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.umk.register.R;
-import com.umk.register.menu.StudentMeta;
 import com.umk.register.app.Verification;
 
 import org.json.JSONArray;
@@ -23,6 +25,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -31,18 +34,22 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 
-public class Notes extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
-    ListView listView;
-    SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "myprefs";
-    public static final String value = "sid";
+    public static final String value = "id";
+    SharedPreferences sharedPreferences;
+    TextView nameTextView, emailTextView, phoneTextView;
+    ImageView imageView;
+    public String email, name, surname, avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         sharedPreferences = getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id","");
+
         String token ="";
         Context context = getApplicationContext();
         try {
@@ -59,6 +66,7 @@ public class Notes extends AppCompatActivity {
             );
 
             token = encryptedSharedPreferences.getString("token","");
+            email = encryptedSharedPreferences.getString("email","");
 
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
@@ -68,18 +76,19 @@ public class Notes extends AppCompatActivity {
         Verification verification = new Verification(this);
         verification.execute("verification",id,token);
 
-        String sid = sharedPreferences.getString("sid","");
-        StudentMeta studentMeta = new StudentMeta(this);
-        studentMeta.execute("student_meta",null,sid);
-
-        String studentName = sharedPreferences.getString("studentName", "");
-        setContentView(R.layout.activity_notes);
-//        getJSON("http://10.0.2.2:5050/getnotes.php");
         getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
+
+        setContentView(R.layout.activity_profile);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Uwagi"+" - "+studentName);
+        actionBar.setTitle("Twój profil");
         actionBar.setDisplayHomeAsUpEnabled(true);
-        listView = findViewById(R.id.listView);
+
+        imageView = findViewById(R.id.imageView);
+        nameTextView = findViewById(R.id.nameTextView);
+        emailTextView = findViewById(R.id.emailTextView);
+        phoneTextView = findViewById(R.id.phoneTextView);
+        emailTextView.setText(email);
+
     }
 
     private void getJSON(final String urlWebService) {
@@ -95,7 +104,7 @@ public class Notes extends AppCompatActivity {
             protected String doInBackground(Void... voids) {
                 sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString(value,"");
-                String action = "get_notes";
+                String action = "get_user_meta";
                 try {
                     URL url = new URL(urlWebService);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -104,7 +113,7 @@ public class Notes extends AppCompatActivity {
                     con.setDoOutput(true);
                     OutputStream outputStream = con.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("student_id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8")+"&"
+                    String post_data = URLEncoder.encode("user_id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8")+"&"
                             +URLEncoder.encode("action", "UTF-8")+"="+URLEncoder.encode(action, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
@@ -125,13 +134,9 @@ public class Notes extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
+//                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 try {
-                    if(s.contains("brak")){
-                        Toast.makeText(getApplicationContext(), "Brak uwag!", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        loadIntoListView(s);
-                    }
+                    loadData(s);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -142,40 +147,63 @@ public class Notes extends AppCompatActivity {
         getJSON.execute();
     }
 
-    private void loadIntoListView(String json) throws JSONException {
+    private void loadData(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
-        String[] positiv = new String[jsonArray.length()];
-        String[] desc = new String[jsonArray.length()];
-        String[] datetime = new String[jsonArray.length()];
-        String[] teacher = new String[jsonArray.length()];
-        String[] tempname = new String[jsonArray.length()];
-        String[] tempsurname = new String[jsonArray.length()];
-        int imgid[] = new int[jsonArray.length()];
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-            positiv[i] = obj.getString("positiv");
-            desc[i] = obj.getString("text");
-            tempname[i] = obj.getString("name");
-            tempsurname[i] = obj.getString("surname");
-            teacher[i] = (tempname[i]+" "+tempsurname[i]);
-            datetime[i] = obj.getString("created_at");
-        }
-        for (int i = 0; i < jsonArray.length(); i++){
-            String temp = "wystawiono: "+datetime[i];
-            String temp2 = "przez: " +teacher[i];
-            teacher[i] = temp2;
-            datetime[i] = temp;
-            if (positiv[i].equals("0")){
-                imgid[i] = R.drawable.badnote;
-            }
-            else if (positiv[i].equals("1")){
-                imgid[i] = R.drawable.goodnote;
-            }
-        }
-        CustomListViewNotes customListViewNotes = new CustomListViewNotes(this,desc,datetime,teacher,imgid);
-        listView.setAdapter(customListViewNotes);
+        String[] metadata = new String[jsonArray.length()];
+        JSONObject obj = jsonArray.getJSONObject(0);
+        metadata[0] = obj.getString("name");
+        name = metadata[0];
+        metadata[0] = obj.getString("surname");
+        surname = metadata[0];
+        String text;
+        text = (name+" "+surname);
+        nameTextView.setText(text);
+        metadata[0] = obj.getString("phone");
+        phoneTextView.setText(metadata[0]);
+        metadata[0] = obj.getString("avatar");
+        avatar = metadata[0];
+        String imgURL  = "http://www.eregister.co.pl/upload/avatars/"+avatar;
+        new DownloadImageTask(imageView).execute(imgURL);
     }
+
+    private class DownloadImageTask extends AsyncTask<String,Void,Bitmap>{
+        ImageView imageView;
+
+        public DownloadImageTask(ImageView imageView){
+            this.imageView = imageView;
+        }
+
+        protected Bitmap doInBackground(String...urls){
+            String urlOfImage = urls[0];
+            Bitmap logo = null;
+            try{
+                if (getResponseCodeForURLUsing(urlOfImage,"HEAD")==404){
+                    logo = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.user_diary);
+                }
+                else {
+                    InputStream is = new URL(urlOfImage).openStream();
+                    logo = BitmapFactory.decodeStream(is);
+                }
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return logo;
+        }
+
+        protected void onPostExecute(Bitmap result){
+            imageView.setImageBitmap(result);
+        }
+    }
+
+    private int getResponseCodeForURLUsing(String address, String method) throws IOException {
+        HttpURLConnection.setFollowRedirects(false);
+        final URL url = new URL(address);
+        HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+        huc.setRequestMethod(method);
+        return huc.getResponseCode();
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {

@@ -12,9 +12,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.umk.register.menu.Menu;
+import com.umk.register.menu.MenuActivity;
 import com.umk.register.R;
-import com.umk.register.menu.settings.SelectStudent;
+import com.umk.register.menu.settings.SelectStudentActivity;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -31,12 +31,12 @@ public class LoginActivity extends AppCompatActivity {
         String id = sharedPreferences.getString(value,"");
         Boolean studentChecked = sharedPreferences.getBoolean("student_checked",false);
         if (id.length() > 0 && studentChecked) {
-            Intent i = new Intent(LoginActivity.this, Menu.class);
+            Intent i = new Intent(LoginActivity.this, MenuActivity.class);
             startActivity(i);
             finish();
         }
         if (id.length() > 0 && !studentChecked) {
-            Intent i = new Intent(LoginActivity.this, SelectStudent.class);
+            Intent i = new Intent(LoginActivity.this, SelectStudentActivity.class);
             startActivity(i);
             finish();
         }

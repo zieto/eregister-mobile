@@ -1,6 +1,5 @@
-package com.umk.register.menu;
+package com.umk.register.app;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -25,7 +24,6 @@ import java.net.URLEncoder;
 public class StudentMeta extends AsyncTask<String, Void, String> {
 
     Context context;
-    AlertDialog alertDialog;
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "myprefs";
     public static final String value = "sid";
@@ -39,11 +37,9 @@ public class StudentMeta extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... voids) {
         String type = voids[0];
-//        String login_url = "http://10.0.2.2:5050/verification.php";
         String meta_url = "http://krzyzunlukas.nazwa.pl/diary-api/api.php";
         String action = "student_meta";
         sharedPreferences = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        String id = sharedPreferences.getString(value,"");
         String user_id = sharedPreferences.getString(value, "");
 
         if (type.equals("student_meta")) {

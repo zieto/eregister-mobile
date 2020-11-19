@@ -51,7 +51,10 @@ public class CustomListViewSchedule extends ArrayAdapter<String> {
         viewHolder.tvw1.setText(start[position]);
         viewHolder.tvw2.setText(end[position]);
         viewHolder.tvw3.setText(subject[position]);
-        viewHolder.tvw4.setText(room[position]);
+        if(subject[position].contains("Wiedza o społeczeństwie")){
+            viewHolder.tvw3.setText("WOS");
+        }
+        viewHolder.tvw4.setText("sala: "+room[position]);
 
         return r;
     }

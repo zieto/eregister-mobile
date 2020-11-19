@@ -14,12 +14,13 @@ import android.view.View;
 import android.widget.GridLayout;
 
 import com.umk.register.R;
+import com.umk.register.app.StudentMeta;
 import com.umk.register.menu.settings.SettingsActivity;
 import com.umk.register.login.LoginActivity;
-import com.umk.register.notes.Notes;
+import com.umk.register.notes.NotesActivity;
 import com.umk.register.schedules.*;
 
-public class Menu extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
     GridLayout gridLayout;
     SharedPreferences sharedPreferences;
@@ -50,32 +51,32 @@ public class Menu extends AppCompatActivity {
                 public void onClick(View view) {
                     if (finalI == 0){
                         /*oceny*/
-                        Intent i = new Intent(Menu.this, GradesList.class);
+                        Intent i = new Intent(MenuActivity.this, GradesListActivity.class);
                         startActivity(i);
                     }
                     else if (finalI == 1){
                         /*plan_zajec*/
-                        Intent i = new Intent(Menu.this, Schedule.class);
+                        Intent i = new Intent(MenuActivity.this, ScheduleActivity.class);
                         startActivity(i);
                     }
                     else if (finalI == 2){
                         /*wiadomosci*/
-                        Intent i = new Intent(Menu.this, Notes.class);
+                        Intent i = new Intent(MenuActivity.this, NotesActivity.class);
                         startActivity(i);
                     }
                     else if (finalI == 3){
                         /*profil*/
-                        Intent i = new Intent(Menu.this, Profile.class);
+                        Intent i = new Intent(MenuActivity.this, ProfileActivity.class);
                         startActivity(i);
                     }
                     else if (finalI == 4){
                         /*ustawienia*/
-                        Intent i = new Intent(Menu.this, SettingsActivity.class);
+                        Intent i = new Intent(MenuActivity.this, SettingsActivity.class);
                         startActivity(i);
                     }
                     else if (finalI == 5){
                         /*wylogowanie*/
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Menu.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MenuActivity.this);
                         builder.setMessage("Czy na pewno chcesz się wylogować?").setPositiveButton("Tak",dialogClickListener).setNegativeButton("Nie",dialogClickListener).show();
 
                     }
@@ -94,7 +95,7 @@ public class Menu extends AppCompatActivity {
             SharedPreferences.Editor encryptedEditor = encryptedSharedPreferences.edit();
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
-                    Intent i = new Intent(Menu.this, LoginActivity.class);
+                    Intent i = new Intent(MenuActivity.this, LoginActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

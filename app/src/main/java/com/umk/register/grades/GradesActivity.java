@@ -32,7 +32,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 
-public class Grades extends AppCompatActivity {
+public class GradesActivity extends AppCompatActivity {
 
     ListView listView;
     TextView avg, teacher;

@@ -28,10 +28,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+public class TuesdayFragment extends Fragment {
 
-public class Wednesday extends Fragment {
-
-    ListView listView;
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "myprefs";
     public static final String value = "sid";
@@ -41,7 +39,6 @@ public class Wednesday extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
 
         View view = inflater.inflate(R.layout.frag_layout,container,false);
-        ListView listView = view.findViewById(R.id.listView);
         getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         return view;
     }
@@ -59,7 +56,7 @@ public class Wednesday extends Fragment {
             protected String doInBackground(Void... voids) {
                 sharedPreferences = getContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString(value,"");
-                String day = "3";
+                String day = "2";
                 String action = "backup_schedule";
                 try {
                     URL url = new URL(urlWebService);
@@ -93,8 +90,6 @@ public class Wednesday extends Fragment {
                 super.onPostExecute(s);
                 try {
                     if(s.contains("brak")){
-                        //TODO
-                        //fix showing Toast on neighbour fragment
                         Toast.makeText(getActivity().getApplicationContext(), "Brak planu zajęć!", Toast.LENGTH_SHORT).show();
                     }
                     else {
@@ -151,4 +146,5 @@ public class Wednesday extends Fragment {
         ListView listView = getView().findViewById(R.id.listView);
         listView.setAdapter(customListView);
     }
+
 }

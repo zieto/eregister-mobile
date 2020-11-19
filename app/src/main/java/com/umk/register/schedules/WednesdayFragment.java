@@ -28,9 +28,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class Friday extends Fragment {
 
-    ListView listView;
+public class WednesdayFragment extends Fragment {
+
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "myprefs";
     public static final String value = "sid";
@@ -40,7 +40,6 @@ public class Friday extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
 
         View view = inflater.inflate(R.layout.frag_layout,container,false);
-        ListView listView = view.findViewById(R.id.listView);
         getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         return view;
     }
@@ -58,8 +57,7 @@ public class Friday extends Fragment {
             protected String doInBackground(Void... voids) {
                 sharedPreferences = getContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString(value,"");
-                String day = "5";
-                //String action = "get_schedule";
+                String day = "3";
                 String action = "backup_schedule";
                 try {
                     URL url = new URL(urlWebService);
@@ -93,9 +91,7 @@ public class Friday extends Fragment {
                 super.onPostExecute(s);
                 try {
                     if(s.contains("brak")){
-                        //TODO
-                        //fix showing Toast on neighbour fragment
-                       Toast.makeText(getActivity().getApplicationContext(), "Brak planu zajęć!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Brak planu zajęć!", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         loadIntoListView(s);
@@ -125,6 +121,8 @@ public class Friday extends Fragment {
             JSONObject obj = jsonArray.getJSONObject(i);
             start_hour[i] = obj.getString("start_hour");
             start_minute[i] = obj.getString("start_minute");
+            end_hour[i] = obj.getString("end_hour");
+            end_minute[i] = obj.getString("end_minute");
             if (start_minute[i].equals("5")){
                 start_minute[i]="05";
             }
@@ -142,7 +140,6 @@ public class Friday extends Fragment {
             full_start[i] = (start_hour[i]+":"+start_minute[i]);
             full_end[i] = (end_hour[i]+":"+end_minute[i]);
             subject[i] = obj.getString("name");
-            //room[i] = obj.getString("classroom");
             room[i] = obj.getString("classroom_id");
         }
 

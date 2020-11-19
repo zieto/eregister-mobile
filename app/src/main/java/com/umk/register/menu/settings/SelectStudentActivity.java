@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.umk.register.R;
-import com.umk.register.menu.Menu;
+import com.umk.register.menu.MenuActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +29,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class SelectStudent extends AppCompatActivity {
+public class SelectStudentActivity extends AppCompatActivity {
 
     ListView listView;
     SharedPreferences sharedPreferences;
@@ -41,7 +41,6 @@ public class SelectStudent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getJSON("http://10.0.2.2:5050/getstudents.php");
         getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
         setContentView(R.layout.activity_select_student);
         ActionBar actionBar = getSupportActionBar();
@@ -53,7 +52,7 @@ public class SelectStudent extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor  = sharedPreferences.edit();
-                        Intent i = new Intent(SelectStudent.this, Menu.class);
+                        Intent i = new Intent(SelectStudentActivity.this, MenuActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
