@@ -3,8 +3,6 @@ package com.umk.register.app;
 import android.app.Application;
 import android.content.Context;
 
-import androidx.security.crypto.MasterKey;
-
 import com.onesignal.OneSignal;
 
 public class ApplicationClass extends Application {

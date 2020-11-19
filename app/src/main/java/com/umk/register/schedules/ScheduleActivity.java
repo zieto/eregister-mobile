@@ -3,7 +3,6 @@ package com.umk.register.schedules;
 import android.content.Context;
 import android.os.Bundle;
 
-
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.security.crypto.EncryptedSharedPreferences;
@@ -18,7 +17,7 @@ import com.umk.register.app.Verification;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
-public class Schedule extends AppCompatActivity {
+public class ScheduleActivity extends AppCompatActivity {
 
     public static final String MyPREFERENCES = "myprefs";
 

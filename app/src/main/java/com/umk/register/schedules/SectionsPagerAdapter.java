@@ -31,19 +31,19 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment =null;
         switch (position){
             case 0:
-                fragment = new Monday();
+                fragment = new MondayFragment();
                 break;
             case 1:
-                fragment = new Tuesday();
+                fragment = new TuesdayFragment();
                 break;
             case 2:
-                fragment = new Wednesday();
+                fragment = new WednesdayFragment();
                 break;
             case 3:
-                fragment = new Thursday();
+                fragment = new ThursdayFragment();
                 break;
             case 4:
-                fragment = new Friday();
+                fragment = new FridayFragment();
                 break;
         }
         return fragment;

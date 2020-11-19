@@ -12,11 +12,11 @@ import android.widget.ListView;
 
 
 import com.umk.register.R;
-import com.umk.register.grades.Grades;
+import com.umk.register.grades.GradesActivity;
 
 import java.util.ArrayList;
 
-public class GradesList extends AppCompatActivity {
+public class GradesListActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,91 +53,91 @@ public class GradesList extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         if (position == 0){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Matematyka");
                             i.putExtra("grade_id","1");
                             startActivity(i);
                         }
                         else if (position == 1){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Biologia");
                             i.putExtra("grade_id","2");
                             startActivity(i);
                         }
                         else if (position == 2){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Fizyka");
                             i.putExtra("grade_id","3");
                             startActivity(i);
                         }
                         else if (position == 3){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Informatyka");
                             i.putExtra("grade_id","4");
                             startActivity(i);
                         }
                         else if (position == 4){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Geografia");
                             i.putExtra("grade_id","5");
                             startActivity(i);
                         }
                         else if (position == 5){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Przyroda");
                             i.putExtra("grade_id","6");
                             startActivity(i);
                         }
                         else if (position == 6){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Chemia");
                             i.putExtra("grade_id","7");
                             startActivity(i);
                         }
                         else if (position == 7){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Religia");
                             i.putExtra("grade_id","8");
                             startActivity(i);
                         }
                         else if (position == 8){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Wychowanie fizyczne");
                             i.putExtra("grade_id","9");
                             startActivity(i);
                         }
                         else if (position == 9){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Język polski");
                             i.putExtra("grade_id","10");
                             startActivity(i);
                         }
                         else if (position == 10){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Język angielski");
                             i.putExtra("grade_id","11");
                             startActivity(i);
                         }
                         else if (position == 11){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Historia");
                             i.putExtra("grade_id","12");
                             startActivity(i);
                         }
                         else if (position == 12){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Wiedza o społeczeństwie");
                             i.putExtra("grade_id","13");
                             startActivity(i);
                         }
                         else if (position == 13){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Muzyka");
                             i.putExtra("grade_id","14");
                             startActivity(i);
                         }
                         else if (position == 14){
-                            Intent i = new Intent(GradesList.this, Grades.class);
+                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
                             i.putExtra("grade_name","Plastyka");
                             i.putExtra("grade_id","15");
                             startActivity(i);

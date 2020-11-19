@@ -7,8 +7,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 
-import com.umk.register.menu.Menu;
-import com.umk.register.menu.settings.SelectStudent;
+import com.umk.register.menu.MenuActivity;
+import com.umk.register.menu.settings.SelectStudentActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -35,7 +35,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
     @Override
     protected Wrapper doInBackground(String... voids) {
         String type = voids[0];
-//        String login_url = "http://10.0.2.2:5050/login.php";
         String login_url = "http://krzyzunlukas.nazwa.pl/diary-api/api.php";
         String action = "login";
 
@@ -115,7 +114,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
             final AlertDialog dialog = builder.create();
             dialog.show();
             if(w.morethanonestudent.contains("double")){
-                final Intent i = new Intent(context, SelectStudent.class);
+                final Intent i = new Intent(context, SelectStudentActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -138,7 +137,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, Wrapper> {
                 }.start();
             }
             else {
-                final Intent i = new Intent(context, Menu.class);
+                final Intent i = new Intent(context, MenuActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

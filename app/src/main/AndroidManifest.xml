@@ -13,23 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.umk.register.menu.settings.SelectStudent"></activity>
-        <activity android:name="com.umk.register.grades.Grades"/>
-        <activity android:name="com.umk.register.menu.settings.About" />
-        <activity android:name="com.umk.register.notes.Notes" />
+        <activity android:name="com.umk.register.menu.settings.SelectStudentActivity"></activity>
+        <activity android:name="com.umk.register.grades.GradesActivity"/>
+        <activity android:name="com.umk.register.menu.settings.AboutActivity" />
+        <activity android:name="com.umk.register.notes.NotesActivity" />
         <activity
-            android:name="com.umk.register.schedules.Schedule"
+            android:name="com.umk.register.schedules.ScheduleActivity"
             android:label="@string/title_activity_plan_zajec"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.umk.register.menu.Profile" />
+        <activity android:name="com.umk.register.menu.ProfileActivity" />
         <activity
             android:name="com.umk.register.menu.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name="com.umk.register.menu.Menu"
+            android:name="com.umk.register.menu.MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.umk.register.menu.GradesList" />
+        <activity android:name="com.umk.register.menu.GradesListActivity" />
         <activity
             android:name="com.umk.register.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.umk.register.R;
 
-public class About extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     TextView info;
     TextView info2;
