@@ -138,15 +138,16 @@ public class GradesActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                try {
-                    if(s.contains("brak")){
-                        Toast.makeText(getApplicationContext(), "Brak ocen z tego przedmiotu!", Toast.LENGTH_SHORT).show();
+                if (s!=null) {
+                    try {
+                        if (s.contains("brak")) {
+                            Toast.makeText(getApplicationContext(), "Brak ocen z tego przedmiotu!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            loadIntoListView(s);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    else {
-                        loadIntoListView(s);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
             }
 
@@ -217,9 +218,11 @@ public class GradesActivity extends AppCompatActivity {
             else if (oceny[i].equals("6")){
                 imgid[i] = R.drawable.grade_6;
             }
+            String temp2 = "waga: " +weight[i];
+            weight[i] = temp2;
         }
         suma = suma/sumawag;
-        CustomListViewGrades customListViewGrades = new CustomListViewGrades(this,desc,datetime,imgid);
+        CustomListViewGrades customListViewGrades = new CustomListViewGrades(this,desc,weight,datetime,imgid);
         listView.setAdapter(customListViewGrades);
         avg.setText("średnia ocen: "+String.format("%.2f", suma));
         teacher.setText("Prowadzący: "+teach);

@@ -2,8 +2,11 @@ package com.umk.register.menu;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,9 +17,23 @@ import android.widget.ListView;
 import com.umk.register.R;
 import com.umk.register.grades.GradesActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class GradesListActivity extends AppCompatActivity {
+
+    ListView lista;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,126 +43,86 @@ public class GradesListActivity extends AppCompatActivity {
         actionBar.setTitle("Oceny"+" - "+studentName);
         actionBar.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_grades_list);
-        final ListView lista = findViewById(R.id.listView);
+        lista = findViewById(R.id.listView);
+        getJSON("http://krzyzunlukas.nazwa.pl/diary-api/api.php");
+    }
 
+    private void getJSON(final String urlWebService) {
+
+        class GetJSON extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                String action = "subjects_list";
+                try {
+                    URL url = new URL(urlWebService);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    StringBuilder sb = new StringBuilder();
+                    con.setRequestMethod("POST");
+                    con.setDoOutput(true);
+                    OutputStream outputStream = con.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String post_data = URLEncoder.encode("action", "UTF-8")+"="+URLEncoder.encode(action, "UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    String json;
+                    while ((json = bufferedReader.readLine()) != null) {
+                        sb.append(json).append("\n");
+                    }
+                    return sb.toString().trim();
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    loadData(s);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        GetJSON getJSON = new GetJSON();
+        getJSON.execute();
+    }
+
+    private void loadData(String json) throws JSONException {
+        JSONArray jsonArray = new JSONArray(json);
+        final String[] grade_id = new String[jsonArray.length()];
+        final String[] name = new String[jsonArray.length()];
         ArrayList<String> przedmioty = new ArrayList<>();
-        przedmioty.add("matematyka");
-        przedmioty.add("biologia");
-        przedmioty.add("fizyka");
-        przedmioty.add("informatyka");
-        przedmioty.add("geografia");
-        przedmioty.add("przyroda");
-        przedmioty.add("chemia");
-        przedmioty.add("religia");
-        przedmioty.add("wychowanie fizyczne");
-        przedmioty.add("polski");
-        przedmioty.add("angielski");
-        przedmioty.add("historia");
-        przedmioty.add("wiedza o społeczeństwie");
-        przedmioty.add("muzyka");
-        przedmioty.add("plastyka");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            grade_id[i] = obj.getString("id");
+            name[i] = obj.getString("name");
+            przedmioty.add(name[i]);
+        }
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_1, przedmioty);
         lista.setAdapter(adapter);
-
-
-        lista.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if (position == 0){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Matematyka");
-                            i.putExtra("grade_id","1");
-                            startActivity(i);
-                        }
-                        else if (position == 1){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Biologia");
-                            i.putExtra("grade_id","2");
-                            startActivity(i);
-                        }
-                        else if (position == 2){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Fizyka");
-                            i.putExtra("grade_id","3");
-                            startActivity(i);
-                        }
-                        else if (position == 3){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Informatyka");
-                            i.putExtra("grade_id","4");
-                            startActivity(i);
-                        }
-                        else if (position == 4){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Geografia");
-                            i.putExtra("grade_id","5");
-                            startActivity(i);
-                        }
-                        else if (position == 5){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Przyroda");
-                            i.putExtra("grade_id","6");
-                            startActivity(i);
-                        }
-                        else if (position == 6){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Chemia");
-                            i.putExtra("grade_id","7");
-                            startActivity(i);
-                        }
-                        else if (position == 7){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Religia");
-                            i.putExtra("grade_id","8");
-                            startActivity(i);
-                        }
-                        else if (position == 8){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Wychowanie fizyczne");
-                            i.putExtra("grade_id","9");
-                            startActivity(i);
-                        }
-                        else if (position == 9){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Język polski");
-                            i.putExtra("grade_id","10");
-                            startActivity(i);
-                        }
-                        else if (position == 10){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Język angielski");
-                            i.putExtra("grade_id","11");
-                            startActivity(i);
-                        }
-                        else if (position == 11){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Historia");
-                            i.putExtra("grade_id","12");
-                            startActivity(i);
-                        }
-                        else if (position == 12){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Wiedza o społeczeństwie");
-                            i.putExtra("grade_id","13");
-                            startActivity(i);
-                        }
-                        else if (position == 13){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Muzyka");
-                            i.putExtra("grade_id","14");
-                            startActivity(i);
-                        }
-                        else if (position == 14){
-                            Intent i = new Intent(GradesListActivity.this, GradesActivity.class);
-                            i.putExtra("grade_name","Plastyka");
-                            i.putExtra("grade_id","15");
-                            startActivity(i);
-                        }
-
-                    }
+        for (int i=1; i<= jsonArray.length(); i++) {
+            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent n = new Intent(GradesListActivity.this, GradesActivity.class);
+                    n.putExtra("grade_name", name[position]);
+                    n.putExtra("grade_id", grade_id[position]);
+                    startActivity(n);
                 }
-        );
+            });
+        }
     }
 
 

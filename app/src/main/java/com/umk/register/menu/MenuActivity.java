@@ -16,7 +16,7 @@ import android.widget.GridLayout;
 import com.umk.register.R;
 import com.umk.register.app.StudentMeta;
 import com.umk.register.menu.settings.SettingsActivity;
-import com.umk.register.login.LoginActivity;
+import com.umk.register.app.LoginActivity;
 import com.umk.register.notes.NotesActivity;
 import com.umk.register.schedules.*;
 

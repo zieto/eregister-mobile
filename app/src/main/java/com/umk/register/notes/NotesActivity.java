@@ -125,15 +125,16 @@ public class NotesActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                try {
-                    if(s.contains("brak")){
-                        Toast.makeText(getApplicationContext(), "Brak uwag!", Toast.LENGTH_SHORT).show();
+                if (s!=null) {
+                    try {
+                        if (s.contains("brak")) {
+                            Toast.makeText(getApplicationContext(), "Brak uwag!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            loadIntoListView(s);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    else {
-                        loadIntoListView(s);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
             }
 

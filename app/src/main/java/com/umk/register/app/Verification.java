@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
-import com.umk.register.login.LoginActivity;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;

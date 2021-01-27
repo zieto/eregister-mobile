@@ -134,7 +134,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-//                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 try {
                     loadData(s);
                 } catch (JSONException e) {
@@ -162,7 +161,7 @@ public class ProfileActivity extends AppCompatActivity {
         phoneTextView.setText(metadata[0]);
         metadata[0] = obj.getString("avatar");
         avatar = metadata[0];
-        String imgURL  = "http://www.eregister.co.pl/upload/avatars/"+avatar;
+        String imgURL  = "http://www.eregister.co.pl/upload/"+avatar;
         new DownloadImageTask(imageView).execute(imgURL);
     }
 

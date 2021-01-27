@@ -1,4 +1,4 @@
-package com.umk.register.login;
+package com.umk.register.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.security.crypto.EncryptedSharedPreferences;

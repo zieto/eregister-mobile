@@ -89,15 +89,16 @@ public class WednesdayFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                try {
-                    if(s.contains("brak")){
-                        Toast.makeText(getActivity().getApplicationContext(), "Brak planu zajęć!", Toast.LENGTH_SHORT).show();
+                if (s!=null) {
+                    try {
+                        if (s.contains("brak")) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Brak planu zajęć!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            loadIntoListView(s);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    else {
-                        loadIntoListView(s);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
             }
 

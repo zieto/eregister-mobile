@@ -1,4 +1,4 @@
-package com.umk.register.login;
+package com.umk.register.app;
 
 import android.app.AlertDialog;
 import android.content.Context;
